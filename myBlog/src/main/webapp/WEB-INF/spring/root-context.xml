@@ -20,18 +20,18 @@
 			<property name="fileEncoding" value="UTF-8" ></property>
 		</bean>
 		
-<!-- 		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"> -->
-<!-- 			<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property> -->
-<!-- 			<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/blog?useSSL=false&amp;serverTimezone=UTC"></property> -->
-<!-- 			<property name="username" value="root"></property> -->
-<!-- 			<property name="password" value="a5180292"></property> -->
-<!-- 		</bean> -->
 		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-			<property name="driverClassName" value="${driverClassName}"></property>
+			<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
 			<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/blog?useSSL=false&amp;serverTimezone=UTC"></property>
-			<property name="username" value="${username}"></property>
-			<property name="password" value="${password}"></property>
+			<property name="username" value="root"></property>
+			<property name="password" value="a5180292"></property>
 		</bean>
+<!-- 		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"> -->
+<!-- 			<property name="driverClassName" value="${driverClassName}"></property> -->
+<!-- 			<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/blog?useSSL=false&amp;serverTimezone=UTC"></property> -->
+<!-- 			<property name="username" value="${username}"></property> -->
+<!-- 			<property name="password" value="${password}"></property> -->
+<!-- 		</bean> -->
 		
 		<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 			<constructor-arg ref="hikariConfig"></constructor-arg>
@@ -43,11 +43,15 @@
 			<property name="mapperLocations" value="classpath:/mapper/*.xml"></property>
 		</bean>
 		
+		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+			<property name="basePackage" value="com.pknu.blog.dao"></property>
+		</bean>
+		
 		<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 			<constructor-arg ref="sqlSessionFactoryBean"></constructor-arg>
 		</bean>
 		
-		<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<bean id="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 			<property name="dataSource" ref="dataSource"></property>
 		</bean>
 			

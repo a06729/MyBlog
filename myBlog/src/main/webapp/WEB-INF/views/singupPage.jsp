@@ -23,17 +23,12 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2 col-sm-12">	
 			<div class="form">
-				<form action="#" method="post" onsubmit="return formCheck();">
+				<form action="/sing" method="post" onsubmit="return formCheck();">
 		
 						<h1>singUp</h1>
 		
 						<div class="input-group col-md-8 col-md-offset-2">
-							<input type="text" id="userId" name="userId" class="input email">
-							<label>아이디</label>
-						</div>
-		
-						<div class="input-group col-md-8 col-md-offset-2">
-								<input type="email" id="userEmail" name="userEmail" class="input email" autocomplete="email">
+								<input type="email" id="userId" name="userId" class="input email" autocomplete="email">
 								<label>이메일</label>
 						</div>
 					

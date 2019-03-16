@@ -1,20 +1,26 @@
 package com.pknu.blog.controller;
 
-import java.util.logging.Logger;
+import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mysql.cj.log.LogFactory;
+import com.pknu.blog.dto.MemberAuthDto;
+import com.pknu.blog.dto.MemberDto;
+import com.pknu.blog.service.MainService;
 
-import lombok.extern.log4j.Log4j;
-@Log4j
+
 @Controller
 public class MainController {
+	@Autowired
+	private MainService mainervice;
 	
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String index() {
@@ -34,6 +40,10 @@ public class MainController {
 	@GetMapping("/singup")
 	public String singupPage() {
 		return "singupPage";
+	}
+	@PostMapping("/sing")
+	public void sing(MemberDto memberDto,MemberAuthDto memberAuthDto){
+		mainervice.memberSing(memberDto,memberAuthDto);
 	}
 	
 	@GetMapping("/accessError")
