@@ -1,17 +1,23 @@
 package com.pknu.blog.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
+import lombok.Data;
+
 @Alias("memberDto")
+@Data
 public class MemberDto {
 	private String userId;
 	private String userPw;
 	private String userName;
+	private Boolean enabled;
+	
 	private Date regdate;
 	private Date updateDate;
-	private String enabled;
+	private List<MemberAuthDto>authList;
 	
 	public String getUserId() {
 		return userId;
@@ -43,18 +49,25 @@ public class MemberDto {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-	public String getEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
-	public void setEnabled(String enabled) {
+	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+	public List<MemberAuthDto> getAuthList() {
+		return authList;
+	}
+	public void setAuthList(List<MemberAuthDto> authList) {
+		this.authList = authList;
+	}
 	@Override
 	public String toString() {
-		return "MemberDto [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", regdate=" + regdate
-				+ ", updateDate=" + updateDate + ", enabled=" + enabled + "]";
+		return "MemberDto [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", enabled=" + enabled
+				+ ", regdate=" + regdate + ", updateDate=" + updateDate + ", authList=" + authList + "]";
 	}
+	
+	
 	
 	
 }

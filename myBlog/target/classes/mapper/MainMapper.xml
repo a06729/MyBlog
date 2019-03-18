@@ -3,11 +3,32 @@
 
 <mapper namespace="com.pknu.blog.dao.MainDao">
 
-<insert id="memberSing" parameterType="map">
-	insert into member(userid,userpw,username) values(#{memberDto.userId},#{memberDto.userPw},#{memberDto.userName})
-</insert>
-<insert id="memberAuth" parameterType="map">
-	insert into member_auth(userid,auth) values(#{memberAuthDto.userId},#{memberAuthDto.auth})
-</insert>
+	<resultMap type="com.pknu.blog.dto.MemberDto" id="memberMap">
+		<id property="userId" column="userid"/>
+		<result property="userId" column="userid"/>
+		<result property="userPw" column="userpw"/>
+		<result property="userName" column="username"/>
+		<result property="enabled" column="enabled"/>
+		<result property="regdate" column="regdate"/>
+		<result property="updateDate" column="updatedate"/>
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+	<resultMap type="com.pknu.blog.dto.MemberAuthDto" id="authMap">
+		<result property="userId" column="userid"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+	
+	<select id="read" resultMap="memberMap">
+		select mem.userid,userpw,username,enabled,regdate,updatedate,auth
+		from member mem LEFT OUTER JOIN member_auth auth on mem.userid=auth.userid
+		where mem.userid=#{userId}
+	</select>
+	
+	<insert id="memberSing" parameterType="map">
+		insert into member(userid,userpw,username) values(#{memberDto.userId},#{memberDto.userPw},#{memberDto.userName})
+	</insert>
+	<insert id="memberAuth" parameterType="map">
+		insert into member_auth(userid,auth) values(#{memberAuthDto.userId},#{memberAuthDto.auth})
+	</insert>
 
 </mapper>
