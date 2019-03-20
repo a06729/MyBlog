@@ -1,5 +1,6 @@
 package com.pknu.blog.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,6 @@ public interface MainService {
 
 	void memberSing(MemberDto memberDto, MemberAuthDto memberAuthDto);
 
-	Map<String, Object> boardImage(BoardFileDto fileDto, HttpServletRequest req, MultipartFile upload, Map<String, Object> fileMap);
+	BoardFileDto boardImage(BoardFileDto fileDto, MultipartHttpServletRequest mtfRequest);
 
 }

@@ -1,6 +1,7 @@
 package com.pknu.blog.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
@@ -18,6 +19,7 @@ public class BoardDto {
 	private String userId;
 	private String category;
 	private String url;
+	private List<BoardFileDto> attachList;
 	public int getBoardNum() {
 		return boardNum;
 	}
@@ -60,11 +62,19 @@ public class BoardDto {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	public List<BoardFileDto> getAttachList() {
+		return attachList;
+	}
+	public void setAttachList(List<BoardFileDto> attachList) {
+		this.attachList = attachList;
+	}
 	@Override
 	public String toString() {
 		return "BoardDto [boardNum=" + boardNum + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", boardDate=" + boardDate + ", userId=" + userId + ", category=" + category + ", url=" + url + "]";
+				+ ", boardDate=" + boardDate + ", userId=" + userId + ", category=" + category + ", url=" + url
+				+ ", attachList=" + attachList + "]";
 	}
+	
 	
 	
 	

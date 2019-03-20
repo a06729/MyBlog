@@ -19,6 +19,7 @@
 	<resources mapping="/fonts/**" location="/resources/fonts/"></resources>
 	<resources mapping="/image/**" location="/resources/image/"></resources>
 	<resources mapping="/ckeditor/**" location="/resources/ckeditor/"></resources>
+	<resources mapping="/summernote/**" location="/resources/summernote/"></resources>
 	<resources mapping="/boardImages/**" location="/resources/boardImages/"></resources>
 	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

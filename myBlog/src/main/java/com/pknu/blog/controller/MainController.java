@@ -36,6 +36,8 @@ public class MainController {
 	@Autowired
 	private MainService mainervice;
 	
+	private List<BoardFileDto> imageList=new ArrayList<>();
+	
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String index() {
 
@@ -77,12 +79,12 @@ public class MainController {
 	
 	@RequestMapping(value="/imageFile",method= {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public Map<String,Object> boardImage(BoardFileDto fileDto,HttpServletRequest req,@RequestParam MultipartFile upload,Model model) {
+	public BoardFileDto boardImage(BoardDto boardDto,BoardFileDto fileDto,MultipartHttpServletRequest mtfRequest,
+			HttpServletResponse res) {
 		System.out.println("이미지 업로드");
-		Map<String, Object>fileMap=new HashMap<>();
-		fileMap=mainervice.boardImage(fileDto,req,upload,fileMap);
-		System.out.println(fileMap);
-		return fileMap;
+		fileDto=mainervice.boardImage(fileDto,mtfRequest);
+		
+		return fileDto;
 	}
 	
 	@GetMapping("/accessError")

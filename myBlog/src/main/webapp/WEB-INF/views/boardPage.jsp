@@ -15,6 +15,10 @@
         <link rel="stylesheet" href="css/inputTempl.css">
         <link rel="stylesheet" href="css/select.css">
         <link rel="stylesheet" href="css/button.css">
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
+		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> 
+        <link rel="stylesheet" href="summernote/dist/summernote.css">
     </head>
     <style>
         .wrapper{
@@ -94,7 +98,7 @@
               </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
           </nav>
-        <form action="/boardWrite" method="post">
+        <form id="boardFrom" action="/boardWrite" method="post">
 		       <div class="wrapper">
 			        <div class="contentArea">
 			            <div class="userInput">
@@ -108,48 +112,73 @@
 			                </select>
 			            </div>
 			            <div name="boardContent" class="editorArea">
-			                <textarea name="editor1" rows="10" cols="80"></textarea>
+			            	<textarea id="summernote"></textarea>
 			            </div>
 			            <div class="submitArea">
 			                <button type="submit" style="margin-top: 10px; float: right;" class="outline white-blue">글쓰기</button>
 			            </div>
+			            <div id="uploadResult">
+			            </div>
 			        </div>
+			        
 		    </div>
         </form>
         <footer>asdasdasd</footer>
-        <script src="js/jquery-3.3.1.min.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> 
-        <script src="js/bootstrap.min.js"></script>
-        <script src="ckeditor/ckeditor.js"></script>
+<!--         <script src="ckeditor/ckeditor.js"></script> -->
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+        <script src="summernote/dist/summernote.js"></script>
+        <script src="summernote/dist/summernote.min.js"></script>
         <script>
-        	
-            $(function(){
-                CKEDITOR.replace('editor1',{
-                	filebrowserUploadUrl:"/imageFile?${_csrf.parameterName}=${_csrf.token}"
-                });
-                window.parent.CKEDITOR.tools.callFunction({"filename" : "${fileMap.filename}", "uploaded" : "${fileMap.uploaded}", "url":"${fileMap.url}"});
-            });
-			
+		$(function(){
+			$('#summernote').summernote({
+				height: 600,
+				fontNames : [ '맑은고딕', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
+				fontNamesIgnoreCheck : [ '맑은고딕' ],
+				focus: true,
+				dialogsInBody: false,
+				dialogsFade: true,
+				callbacks: {
+					onImageUpload: function(files, editor, welEditable) {
+			            for (var i = files.length - 1; i >= 0; i--) {
+			            	sendFile(files[i], this);
+			            }
+			        }
+				}
+				
+			});
+	
+		});
+		
+		function sendFile(file, el) {
+			var form_data = new FormData();
+	      	form_data.append('file', file);
+	      	$.ajax({
+	        	data: form_data,
+	        	type: "POST",
+	        	url: '/imageFile?${_csrf.parameterName}=${_csrf.token}',
+	        	cache: false,
+	        	enctype: 'multipart/form-data',
+	        	async : true,
+	        	contentType: false,
+	        	processData: false,
+	        	success: function(img_name) {
+	          		$(el).summernote('editor.insertImage', img_name.url);
+	        		console.log(img_name);
+	        		let urlInput="";
+	        		let imgurl=JSON.stringify(img_name.url);
+	        		//hidden값으로 saveUrl을 숨겨서 나중에 form으로 넘겨준다.
+	        		urlInput='<input type="hidden" id=savaUrl name="saveUrl" value='+imgurl+'>';
+	        		$('#boardFrom').append(urlInput);
+
+	        	}
+	      	});
+	    }
         </script>
-	<script>
-            //클릭한 메뉴에서 클릭한거만 active 클래스를 추가하고 나머지는 삭제
-            function clickTag(event){
-                const target= console.dir(event.target.parentNode);
-                const li_Tag=event.target.parentNode;  
-                const all_li=document.querySelectorAll('li');
-                if(li_Tag.className=='active'){
-                    li_Tag.classList.remove('active');
-                }else{
-                    all_li.forEach(function(e){
-                        e.classList.remove('active');
-                    });
-                    li_Tag.classList.add('active');
-                }
-            }
-            function init (){
-                addEventListener("click",clickTag);
-            }
-            init();
-        </script>
+
     </body>
 </html>
