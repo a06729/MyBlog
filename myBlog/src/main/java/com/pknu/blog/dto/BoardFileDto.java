@@ -11,7 +11,7 @@ public class BoardFileDto {
 	private String original_File_Name;
 	private String stored_File_Name;
 	private long file_Size;
-	private String filePate;
+	private String filePath;
 	private String url;
 	private int uploaded;
 	
@@ -85,15 +85,15 @@ public class BoardFileDto {
 
 
 
-	public String getFilePate() {
-		return filePate;
+	public String getFilePath() {
+		return filePath;
 	}
 
 
 
 
-	public void setFilePate(String filePate) {
-		this.filePate = filePate;
+	public void setFilePath(String filePate) {
+		this.filePath = filePate;
 	}
 
 
@@ -131,7 +131,7 @@ public class BoardFileDto {
 	public String toString() {
 		return "BoardFileDto [fileNum=" + fileNum + ", boardNum=" + boardNum + ", original_File_Name="
 				+ original_File_Name + ", stored_File_Name=" + stored_File_Name + ", file_Size=" + file_Size
-				+ ", filePate=" + filePate + ", url=" + url + ", uploaded=" + uploaded + "]";
+				+ ", filePate=" + filePath + ", url=" + url + ", uploaded=" + uploaded + "]";
 	}
 	
 	

@@ -59,7 +59,7 @@ public class MainServiceImpl implements MainService {
 			UUID uuid=UUID.randomUUID();
 			
 			String originFileName =mf.getOriginalFilename();
-			String storedFileName=uuid+mf.getOriginalFilename();
+			String storedFileName=uuid+"_"+mf.getOriginalFilename();
 			long fileSize=mf.getSize();
 			String savePath=path+File.separator+"resources"+File.separator+"boardImages"+File.separator+storedFileName;
 			String urlPath=File.separator+"boardImages"+File.separator+storedFileName;			
@@ -78,7 +78,7 @@ public class MainServiceImpl implements MainService {
 			}
 			fileDto.setUploaded(1);
 			fileDto.setUrl(urlPath);;
-			fileDto.setFilePate(savePath);
+			fileDto.setFilePath(savePath);
 			fileDto.setOriginal_File_Name(originFileName);
 			fileDto.setStored_File_Name(storedFileName);
 			fileDto.setFile_Size(fileSize);
@@ -117,5 +117,25 @@ public class MainServiceImpl implements MainService {
 		
 		return fileDto;
 	}
+
+	@Override
+	public BoardFileDto deletFile(String[] date, String original_File_Name, String stored_File_Name,BoardFileDto boardFileDto ,HttpServletRequest req) {
+		String path=req.getSession().getServletContext().getRealPath(File.separator)+File.separator+"resources"+File.separator+date[3]+File.separator+date[4];
+		String urlPath=File.separator+"boardImages"+File.separator+date[4];
+		
+		
+		File file=new File(path);
+		boardFileDto.setOriginal_File_Name(original_File_Name);
+		boardFileDto.setStored_File_Name(stored_File_Name);
+		boardFileDto.setFilePath(path);
+		boardFileDto.setUrl(urlPath);
+		boardFileDto.setFile_Size(file.length());
+		if(file.exists()) {
+			file.delete();
+		}
+		return boardFileDto;
+	}
+	
+	
 
 }

@@ -19,4 +19,6 @@ public interface MainService {
 
 	BoardFileDto boardImage(BoardFileDto fileDto, MultipartHttpServletRequest mtfRequest);
 
+	BoardFileDto deletFile(String[] date, String original_File_Name, String stored_File_Name, BoardFileDto boardFileDto, HttpServletRequest req);
+
 }

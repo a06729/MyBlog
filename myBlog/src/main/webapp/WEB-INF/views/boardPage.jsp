@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/inputTempl.css">
         <link rel="stylesheet" href="css/select.css">
         <link rel="stylesheet" href="css/button.css">
@@ -19,6 +18,10 @@
 		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
         <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> 
         <link rel="stylesheet" href="summernote/dist/summernote.css">
+		<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     </head>
     <style>
         .wrapper{
@@ -56,48 +59,36 @@
     </style>
 
     <body>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">이슈저장소</a>
-              </div>
-          
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  <li><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                  <li><a href="#">Link</a></li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">One more separated link</a></li>
-                    </ul>
-                  </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-                </ul>
-              </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-          </nav>
+  <header>
+    <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+      <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+      <div class="title-bar-title">Menu</div>
+    </div>
+
+    <div class="top-bar" id="example-menu">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text">Site Title</li>
+          <li class="has-submenu">
+            <a href="#0">One</a>
+            <ul class="submenu menu vertical" data-submenu>
+              <li><a href="#0">One</a></li>
+              <li><a href="#0">Two</a></li>
+              <li><a href="#0">Three</a></li>
+            </ul>
+          </li>
+          <li><a href="#0">Two</a></li>
+          <li><a href="#0">Three</a></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu">
+          <li><input type="search" placeholder="Search"></li>
+          <li><button type="button" class="button">Search</button></li>
+        </ul>
+      </div>
+    </div>
+  </header>
         <form id="boardFrom" action="/boardWrite" method="post">
 		       <div class="wrapper">
 			        <div class="contentArea">
@@ -123,17 +114,29 @@
 			        
 		    </div>
         </form>
-        <footer>asdasdasd</footer>
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> 
-<!--         <script src="ckeditor/ckeditor.js"></script> -->
+        <footer>
+			<div class="row expanded callout secondary">
+				<div class="medium-12 columns">
+					<ul class="menu align-right">
+						<li class="menu-text">Copyright © 2019</li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+<!-- 	   	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
+<!--         <script src="/js/jquery-3.3.1.min.js"></script>  -->
+		<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
         <script src="summernote/dist/summernote.js"></script>
         <script src="summernote/dist/summernote.min.js"></script>
-        <script>
+        <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+		<script>
+		$(document).foundation();
+		</script>
+	<script>
 		$(function(){
 			$('#summernote').summernote({
 				height: 600,
@@ -147,12 +150,73 @@
 			            for (var i = files.length - 1; i >= 0; i--) {
 			            	sendFile(files[i], this);
 			            }
-			        }
+			        },
+		            onMediaDelete : function(target) {
+		                console.log(target[0].src); 
+		                deleteFile(target[0].src);
+		            }
 				}
 				
 			});
 	
 		});
+		
+		function deleteFile(src){
+			$.ajax({
+				data:{src:src},
+				type:"POST",
+				url:"/deleteFile?src="+src+"&${_csrf.parameterName}=${_csrf.token}",
+				cache:false,
+	        	async : true,
+	        	contentType: false,
+	        	processData: false,
+				success:function(res){
+					let hiddenUrl=document.querySelectorAll('#url');
+					let hiddenOriginal_File_Name=document.querySelectorAll('#original_File_Name');
+					let hiddenStored_File_Name=document.querySelectorAll('#stored_File_Name');
+					let hiddenFile_Size=document.querySelectorAll('#file_Size');
+					let hiddenFilePath=document.querySelectorAll('#filePath');
+					
+					console.log("res:"+res);
+					console.dir("res:"+res);
+					for(var i=0; i<hiddenUrl.length; i++){
+						let item=hiddenUrl.item(i);
+						let value=item.value;
+						if(res.url==item.value){
+							$('#url').remove();
+						}
+					}
+					for(var i=0; i<hiddenStored_File_Name.length; i++){
+						let item=hiddenStored_File_Name.item(i);
+						let value=item.value;
+						if(res.stored_File_Name==item.value){
+							$('#stored_File_Name').remove();
+						}
+					}
+					for(var i=0; i<hiddenFile_Size.length; i++){
+						let item=hiddenFile_Size.item(i);
+						let value=item.value;
+						if(res.file_Size==item.value){
+							$('#file_Size').remove();
+						}
+					}
+					for(var i=0; i<hiddenOriginal_File_Name.length; i++){
+						let item=hiddenOriginal_File_Name.item(i);
+						let value=item.value;
+						if(res.original_File_Name==item.value){
+							$('#original_File_Name').remove();
+						}
+					}
+					for(var i=0; i<hiddenFilePath.length; i++){
+						let item=hiddenFilePath.item(i);
+						let value=item.value;
+						if(res.filePath==item.value){
+							$('#filePath').remove();
+						}
+					}
+				}
+			});
+		}
 		
 		function sendFile(file, el) {
 			var form_data = new FormData();
@@ -169,16 +233,27 @@
 	        	success: function(img_name) {
 	          		$(el).summernote('editor.insertImage', img_name.url);
 	        		console.log(img_name);
-	        		let urlInput="";
-	        		let imgurl=JSON.stringify(img_name.url);
+	        		let original_File_Name="";
+	        		let stored_File_Name="";
+	        		let file_Size="";
+	        		let filePate=""
+	        		let url="";
 	        		//hidden값으로 saveUrl을 숨겨서 나중에 form으로 넘겨준다.
-	        		urlInput='<input type="hidden" id=savaUrl name="saveUrl" value='+imgurl+'>';
-	        		$('#boardFrom').append(urlInput);
+	        		url='<input type="hidden" id=url name="url" value='+img_name.url+'>';
+	        		original_File_Nam='<input type="hidden" id=original_File_Name name="original_File_Name" value='+img_name.original_File_Name+'>';
+	        		stored_File_Name='<input type="hidden" id=stored_File_Name name="stored_File_Name" value='+img_name.stored_File_Name+'>';
+	        		file_Size='<input type="hidden" id=file_Size name="file_Size" value='+img_name.file_Size+'>';
+	        		filePate='<input type="hidden" id=filePath name="filePath" value='+img_name.filePath+'>';
+	        		
+	        		$('#boardFrom').append(url);
+	        		$('#boardFrom').append(original_File_Nam);
+	        		$('#boardFrom').append(stored_File_Name);
+	        		$('#boardFrom').append(file_Size);
+	        		$('#boardFrom').append(filePate);
 
 	        	}
 	      	});
 	    }
         </script>
-
     </body>
 </html>

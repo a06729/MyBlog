@@ -36,8 +36,6 @@ public class MainController {
 	@Autowired
 	private MainService mainervice;
 	
-	private List<BoardFileDto> imageList=new ArrayList<>();
-	
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String index() {
 
@@ -85,6 +83,23 @@ public class MainController {
 		fileDto=mainervice.boardImage(fileDto,mtfRequest);
 		
 		return fileDto;
+	}
+	
+	@PostMapping("/deleteFile")
+	@ResponseBody
+	public BoardFileDto deleteFile(@RequestParam("src") String delsrc,HttpServletRequest req,BoardFileDto boardFileDto) {
+		String date[]=delsrc.split("/");
+		String stored_File_Name=date[4];
+		int idx= stored_File_Name.indexOf("_");
+		String original_File_Name=stored_File_Name.substring(idx+1);
+		for(int i=0; i<date.length; i++) {
+			System.out.println("date["+i+"]:"+date[i]);
+		}
+		
+		System.out.println("original_File_Name:"+original_File_Name);
+		System.out.println("stored_File_Name:"+stored_File_Name);
+		
+		return mainervice.deletFile(date,original_File_Name,stored_File_Name,boardFileDto,req);
 	}
 	
 	@GetMapping("/accessError")
