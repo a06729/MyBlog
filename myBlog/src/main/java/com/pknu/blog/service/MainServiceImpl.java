@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
 import com.google.gson.JsonObject;
 import com.pknu.blog.dao.MainDao;
+import com.pknu.blog.dto.BoardDto;
 import com.pknu.blog.dto.BoardFileDto;
 import com.pknu.blog.dto.MemberAuthDto;
 import com.pknu.blog.dto.MemberDto;
@@ -76,7 +78,6 @@ public class MainServiceImpl implements MainService {
 				}catch (IOException e) {
 					e.printStackTrace();
 			}
-			fileDto.setUploaded(1);
 			fileDto.setUrl(urlPath);;
 			fileDto.setFilePath(savePath);
 			fileDto.setOriginal_File_Name(originFileName);
@@ -134,6 +135,20 @@ public class MainServiceImpl implements MainService {
 			file.delete();
 		}
 		return boardFileDto;
+	}
+
+	@Override
+	public void insertWrite(BoardDto boardDto) {
+		boardDto.setUserId("a06729");//일단a06729를 아이디로 입력
+		mainDao.insertSelectKey(boardDto);	
+		
+		if(boardDto.getAttachList()==null||boardDto.getAttachList().size()<=0) {
+			return;
+		}
+		boardDto.getAttachList().forEach(attach ->{
+			attach.setBoardNum(boardDto.getBoardNum());
+			mainDao.insertAttach(attach);
+		});
 	}
 	
 	

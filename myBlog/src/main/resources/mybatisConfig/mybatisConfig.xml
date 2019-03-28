@@ -17,7 +17,7 @@
     </settings>
     
     <typeAliases>
-    	<package name="com.pknu.blog.dto.*"/>
+    	<package name="com.pknu.blog.dto"/>
     </typeAliases>
     
 </configuration>

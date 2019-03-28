@@ -89,31 +89,37 @@
       </div>
     </div>
   </header>
-        <form id="boardFrom" action="/boardWrite" method="post">
-		       <div class="wrapper">
-			        <div class="contentArea">
-			            <div class="userInput">
-			                <input name="boardTitle" type="text" placeholder="제목">
-			                <select name="category" class="select-css" style="margin-top: 10px; margin-bottom: 10px;">
-			                    <option>This is a native select element</option>
-			                    <option>Apples</option>
-			                    <option>Bananas</option>
-			                    <option>Grapes</option>
-			                    <option>Oranges</option>
-			                </select>
-			            </div>
-			            <div name="boardContent" class="editorArea">
-			            	<textarea id="summernote"></textarea>
-			            </div>
-			            <div class="submitArea">
-			                <button type="submit" style="margin-top: 10px; float: right;" class="outline white-blue">글쓰기</button>
-			            </div>
-			            <div id="uploadResult">
-			            </div>
-			        </div>
-			        
-		    </div>
-        </form>
+        <form id="boardFrom" name="boardFrom" action="/boardWrite" method="post" role="form"> 
+			<div class="wrapper">
+				<div class="contentArea">
+					<div class="userInput">
+						<input name="boardTitle" type="text" placeholder="제목"> 
+						<select
+							name="category" class="select-css"
+							style="margin-top: 10px; margin-bottom: 10px;">
+							<option>This is a native select element</option>
+							<option>Apples</option>
+							<option>Bananas</option>
+							<option>Grapes</option>
+							<option>Oranges</option>
+						</select>
+					</div>
+					<div class="editorArea">
+						<textarea id="summernote" name="boardContent"></textarea>
+					</div>
+					<div class="submitArea">
+						<button type="submit" style="margin-top: 10px; float: right;"
+							class="outline white-blue">글쓰기</button>
+<!-- 						<input type="button" style="margin-top: 10px; float: right;" -->
+<!-- 						class="outline white-blue" value="글쓰기"> -->
+					</div>
+				</div>
+			</div>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	</form>
+	<div id="uploadResult">
+	
+	</div>
         <footer>
 			<div class="row expanded callout secondary">
 				<div class="medium-12 columns">
@@ -171,6 +177,7 @@
 	        	contentType: false,
 	        	processData: false,
 				success:function(res){
+					//이미지 삭제후 hidden값도 삭제
 					let hiddenUrl=document.querySelectorAll('#url');
 					let hiddenOriginal_File_Name=document.querySelectorAll('#original_File_Name');
 					let hiddenStored_File_Name=document.querySelectorAll('#stored_File_Name');
@@ -245,15 +252,60 @@
 	        		file_Size='<input type="hidden" id=file_Size name="file_Size" value='+img_name.file_Size+'>';
 	        		filePate='<input type="hidden" id=filePath name="filePath" value='+img_name.filePath+'>';
 	        		
-	        		$('#boardFrom').append(url);
-	        		$('#boardFrom').append(original_File_Nam);
-	        		$('#boardFrom').append(stored_File_Name);
-	        		$('#boardFrom').append(file_Size);
-	        		$('#boardFrom').append(filePate);
+	        		$('#uploadResult').append(url);
+	        		$('#uploadResult').append(original_File_Nam);
+	        		$('#uploadResult').append(stored_File_Name);
+	        		$('#uploadResult').append(file_Size);
+	        		$('#uploadResult').append(filePate);
 
 	        	}
 	      	});
 	    }
+		$(document).ready(function(){ 
+			var formObj=$("form[role='form']");	
+			$("button[type='submit']").on("click",function(e){
+						e.preventDefault();
+						console.log("submit clicke");
+						var str="";
+						
+						let hiddenUrl=document.querySelectorAll('#url');
+						let hiddenOriginal_File_Name=document.querySelectorAll('#original_File_Name');
+						let hiddenStored_File_Name=document.querySelectorAll('#stored_File_Name');
+						let hiddenFile_Size=document.querySelectorAll('#file_Size');
+						let hiddenFilePath=document.querySelectorAll('#filePath');
+						
+						for(var i=0; i<hiddenUrl.length; i++){
+							let item=hiddenUrl.item(i);
+							let value=item.value;
+							str+='<input type="hidden" name="attachList['+i+'].url" value='+value+'>';
+						}
+						for(var i=0; i<hiddenOriginal_File_Name.length; i++){
+							let item=hiddenOriginal_File_Name.item(i);
+							let value=item.value;
+							str+='<input type="hidden" name="attachList['+i+'].original_File_Name" value='+value+'>';
+						}
+						for(var i=0; i<hiddenStored_File_Name.length; i++){
+							let item=hiddenStored_File_Name.item(i);
+							let value=item.value;
+							str+='<input type="hidden" name="attachList['+i+'].stored_File_Name" value='+value+'>';
+						}
+						for(var i=0; i<hiddenFile_Size.length; i++){
+							let item=hiddenFile_Size.item(i);
+							let value=item.value;
+							str+='<input type="hidden" name="attachList['+i+'].file_Size" value='+value+'>';
+						}
+						for(var i=0; i<hiddenFilePath.length; i++){
+							let item=hiddenFilePath.item(i);
+							let value=item.value;
+							str+='<input type="hidden" name="attachList['+i+'].filePath" value='+value+'>';
+						}
+						str+='<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">'
+						console.log("str:"+str);
+						console.dir(str);
+						formObj.append(str).submit();
+				});
+		});
+
         </script>
     </body>
 </html>

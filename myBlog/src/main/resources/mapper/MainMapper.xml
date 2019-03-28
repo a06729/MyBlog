@@ -24,6 +24,20 @@
 		where mem.userid=#{userId}
 	</select>
 	
+	<insert id="insertSelectKey" parameterType="boardDto">
+		insert into board(BOARDTITLE,BOARDCONTENT,USERID,CATEGORY) 
+		values(#{boardTitle},#{boardContent},#{userId},#{category})
+		<selectKey resultType="int"  keyProperty="boardNum" order="AFTER" keyColumn="BOARDNUM">
+			select LAST_INSERT_ID() 
+			from DUAL;
+		</selectKey>
+	</insert>
+	
+	<insert id="insertAttach" parameterType="boardFileDto">
+		insert into board_file(BOARDNUM,ORIGINAL_FILE_NAME,STORED_FILE_NAME,FILE_SIZE,FILEPATH,URL)
+		values(#{boardNum},#{original_File_Name},#{stored_File_Name},#{file_Size},#{filePath},#{url})
+	</insert>
+	
 	<insert id="memberSing" parameterType="map">
 		insert into member(userid,userpw,username) values(#{memberDto.userId},#{memberDto.userPw},#{memberDto.userName})
 	</insert>

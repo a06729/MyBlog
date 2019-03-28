@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,11 +71,11 @@ public class MainController {
 	}
 	//게시판 글쓰기
 	@PostMapping("/boardWrite")
-	public void boardWrite(BoardDto boardDto,BoardFileDto boardFileDto,HttpServletResponse res) {
-		
-		res.encodeRedirectURL("/");
+	public String boardWrite(BoardDto boardDto){
+		mainervice.insertWrite(boardDto);
+		return "redirect:/";
 	}
-	
+	//이미지 업로드
 	@RequestMapping(value="/imageFile",method= {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public BoardFileDto boardImage(BoardDto boardDto,BoardFileDto fileDto,MultipartHttpServletRequest mtfRequest,
@@ -85,20 +86,18 @@ public class MainController {
 		return fileDto;
 	}
 	
+	//에디터 이미지 삭제버튼 누르면 파일 삭제
 	@PostMapping("/deleteFile")
 	@ResponseBody
 	public BoardFileDto deleteFile(@RequestParam("src") String delsrc,HttpServletRequest req,BoardFileDto boardFileDto) {
-		String date[]=delsrc.split("/");
-		String stored_File_Name=date[4];
-		int idx= stored_File_Name.indexOf("_");
-		String original_File_Name=stored_File_Name.substring(idx+1);
-		for(int i=0; i<date.length; i++) {
-			System.out.println("date["+i+"]:"+date[i]);
-		}
-		
-		System.out.println("original_File_Name:"+original_File_Name);
-		System.out.println("stored_File_Name:"+stored_File_Name);
-		
+		String date[]=delsrc.split("/");//split으로 '/'를 기준으로 나눈다.
+		String stored_File_Name=date[4];//배열[4]번째에 stored_File_Name이 된다.
+		int idx= stored_File_Name.indexOf("_");//stored_File_Name에서 '_'이글자 뒤에는 original_File_Name이 나온다.
+		String original_File_Name=stored_File_Name.substring(idx+1);//'_'의 한칸뒤에는 original_File_Name이다
+//		for(int i=0; i<date.length; i++) {
+//			System.out.println("date["+i+"]:"+date[i]);
+//		}
+
 		return mainervice.deletFile(date,original_File_Name,stored_File_Name,boardFileDto,req);
 	}
 	

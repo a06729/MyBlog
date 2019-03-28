@@ -5,6 +5,8 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import com.pknu.blog.dto.BoardDto;
+import com.pknu.blog.dto.BoardFileDto;
 import com.pknu.blog.dto.MemberDto;
 @Repository
 public interface MainDao {
@@ -14,5 +16,9 @@ public interface MainDao {
 	public void memberAuth(Map<String, Object> memberMap);
 
 	public MemberDto read(String userId);
+
+	public void insertSelectKey(BoardDto boardDto);
+
+	public void insertAttach(BoardFileDto attach);
 
 }
