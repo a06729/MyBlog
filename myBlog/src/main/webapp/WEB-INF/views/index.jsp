@@ -334,177 +334,58 @@ i.fi-social-tumblr {
 	<div class="row">
 		<div class="large-8 columns" style="border-right: 1px solid #E3E5E8;">
 			<article>
-				<div class="row">
-					<div class="large-6 columns">
-						<p>
-							<img src="https://placehold.it/600x370&text=Look at me!"
-								alt="image for article" alt="article preview image">
-						</p>
+				<c:forEach var="list" items="${boarDto}">
+					<div class="row">
+						<div class="large-6 columns">
+							<p>
+								<c:choose>
+									<c:when test="${list.url eq null}">
+										<img src="http://placehold.it/350x150"
+										alt="image for article" alt="article preview image">
+									</c:when>
+									<c:when test="${list.url ne null}">
+										<img src="${list.url}"
+										alt="image for article" alt="article preview image">
+									</c:when>
+								</c:choose>
+							</p>
+						</div>
+						<div class="large-6 columns">
+							<h5>
+								<a href="#">${list.boardTitle}</a>
+							</h5>
+							<p>
+								<span><i class="fi-torso"> ${list.userId} &nbsp;&nbsp;</i></span> 
+								<span><i class="fi-calendar"> ${list.boardDate} &nbsp;&nbsp;</i></span> 
+							</p>
+							<p id="content">${list.sideTitle}</p>
+						</div>
 					</div>
-					<div class="large-6 columns">
-						<h5>
-							<a href="#">'Death Star' Vaporizes Its Own Planet</a>
-						</h5>
-						<p>
-							<span><i class="fi-torso"> By Thadeus &nbsp;&nbsp;</i></span> <span><i
-								class="fi-calendar"> 11/23/16 &nbsp;&nbsp;</i></span> <span><i
-								class="fi-comments"> 6 comments</i></span>
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Recusandae impedit beatae, ipsum delectus aperiam nesciunt magni
-							facilis ullam.</p>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-					<div class="large-6 columns">
-						<p>
-							<img src="https://placehold.it/600x370&text=Look at me!"
-								alt="image for article" alt="article preview image">
-						</p>
-					</div>
-					<div class="large-6 columns">
-						<h5>
-							<a href="#">NASA's SLS Rocket Sheds Saturn V Color Scheme in
-								Design Review</a>
-						</h5>
-						<p>
-							<span><i class="fi-torso"> By Thadeus &nbsp;&nbsp;</i></span> <span><i
-								class="fi-calendar"> 11/23/16 &nbsp;&nbsp;</i></span> <span><i
-								class="fi-comments"> 6 comments</i></span>
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Recusandae impedit beatae, ipsum delectus aperiam nesciunt magni
-							facilis ullam.</p>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-					<div class="large-6 columns">
-						<p>
-							<img src="https://placehold.it/600x370&text=Look at me!"
-								alt="image for article" alt="article preview image">
-						</p>
-					</div>
-					<div class="large-6 columns">
-						<h5>
-							<a href="#">Ingredients for Life Were Always Present on
-								Earth, Comet Suggests</a>
-						</h5>
-						<p>
-							<span><i class="fi-torso"> By Thadeus &nbsp;&nbsp;</i></span> <span><i
-								class="fi-calendar"> 11/23/16 &nbsp;&nbsp;</i></span> <span><i
-								class="fi-comments"> 6 comments</i></span>
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Recusandae impedit beatae, ipsum delectus aperiam nesciunt magni
-							facilis ullam.</p>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-					<div class="large-6 columns">
-						<p>
-							<img src="https://placehold.it/600x370&text=Look at me!"
-								alt="image for article" alt="article preview image">
-						</p>
-					</div>
-					<div class="large-6 columns">
-						<h5>
-							<a href="#">Astronaut's Watch Worn on the Moon Sells for
-								Record $1.6 Million</a>
-						</h5>
-						<p>
-							<span><i class="fi-torso"> By Thadeus &nbsp;&nbsp;</i></span> <span><i
-								class="fi-calendar"> 11/23/16 &nbsp;&nbsp;</i></span> <span><i
-								class="fi-comments"> 6 comments</i></span>
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Recusandae impedit beatae, ipsum delectus aperiam nesciunt magni
-							facilis ullam.</p>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-					<div class="large-6 columns">
-						<p>
-							<img src="https://placehold.it/600x370&text=Look at me!"
-								alt="image for article" alt="article preview image">
-						</p>
-					</div>
-					<div class="large-6 columns">
-						<h5>
-							<a href="#">Interstellar Dust on the Galaxy's Magnetic Field
-								| Space Wallpaper</a>
-						</h5>
-						<p>
-							<span><i class="fi-torso"> By Thadeus &nbsp;&nbsp;</i></span> <span><i
-								class="fi-calendar"> 11/23/16 &nbsp;&nbsp;</i></span> <span><i
-								class="fi-comments"> 6 comments</i></span>
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Recusandae impedit beatae, ipsum delectus aperiam nesciunt magni
-							facilis ullam.</p>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-					<div class="large-6 columns">
-						<p>
-							<img src="https://placehold.it/600x370&text=Look at me!"
-								alt="image for article" alt="article preview image">
-						</p>
-					</div>
-					<div class="large-6 columns">
-						<h5>
-							<a href="#">Explore the Moon (Virtually) with These Awesome
-								Global Maps</a>
-						</h5>
-						<p>
-							<span><i class="fi-torso"> By Thadeus &nbsp;&nbsp;</i></span> <span><i
-								class="fi-calendar"> 11/23/16 &nbsp;&nbsp;</i></span> <span><i
-								class="fi-comments"> 6 comments</i></span>
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Recusandae impedit beatae, ipsum delectus aperiam nesciunt magni
-							facilis ullam.</p>
-					</div>
-				</div>
-				<hr>
-				<div class="row">
-					<div class="large-6 columns">
-						<p>
-							<img src="https://placehold.it/600x370&text=Look at me!"
-								alt="image for article" alt="article preview image">
-						</p>
-					</div>
-					<div class="large-6 columns">
-						<h5>
-							<a href="#">Best Space Books and Sci-Fi: A Space.com Reading
-								List</a>
-						</h5>
-						<p>
-							<span><i class="fi-torso"> By Thadeus &nbsp;&nbsp;</i></span> <span><i
-								class="fi-calendar"> 11/23/16 &nbsp;&nbsp;</i></span> <span><i
-								class="fi-comments"> 6 comments</i></span>
-						</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Recusandae impedit beatae, ipsum delectus aperiam nesciunt magni
-							facilis ullam.</p>
-					</div>
-				</div>
-				<hr>
+					<hr>
+				</c:forEach>
 				<ul class="pagination" role="navigation" aria-label="Pagination">
-					<li class="disabled">Previous <span class="show-for-sr">page</span></li>
-					<li class="current"><span class="show-for-sr">You're on
-							page</span> 1</li>
-					<li><a href="#" aria-label="Page 2">2</a></li>
-					<li><a href="#" aria-label="Page 3">3</a></li>
-					<li><a href="#" aria-label="Page 4">4</a></li>
-					<li><a href="#" aria-label="Next page">Next <span
-							class="show-for-sr">page</span></a></li>
+					<c:if test="${pageMaker.prev}">
+						<li class="paginate_button pagination-previous"><a href="${pageMaker.starPage-1}">Previous <span class="show-for-sr">page</span></a></li>
+					</c:if>
+				
+					<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+						<li class="paginate_button  ${pageMaker.cri.pageNum==num ? "active":""}">
+							<a href="${num}">${num}</a>
+						</li>
+					</c:forEach>
+<!-- 					<li class="current">1</li> -->
+<!-- 					<li><a href="#" aria-label="Page 2">2</a></li> -->
+<!-- 					<li><a href="#" aria-label="Page 3">3</a></li> -->
+<!-- 					<li><a href="#" aria-label="Page 4">4</a></li> -->
+					<c:if test="${pageMaker.next}">
+						<li class="paginate_button pagination-next"><a href="${pageMaker.endPage+1}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+					</c:if>
 				</ul>
 			</article>
+			<form id="actionForm" action="/" method="get">
+				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+			</form>
 		</div>
 		<div class="large-4 columns">
 			<aside>
@@ -630,6 +511,14 @@ i.fi-social-tumblr {
 	</script>
 	<script>
     	$(document).foundation();
+    	let actionForm=$("#actionForm");
+    	$(".paginate_button a").on("click",function(e){
+    		e.preventDefault();
+    		
+    		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+    		
+    		actionForm.submit();
+    	});
   	</script>
 </body>
 </html>

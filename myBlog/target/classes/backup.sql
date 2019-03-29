@@ -6,12 +6,14 @@ collate ='utf8_general_ci';
 create table board(
 	BOARDNUM int auto_increment primary key,
     BOARDTITLE varchar(100),
+    SIDETITLE varchar(250),
     BOARDCONTENT varchar(3000),
     BOARDDATE datetime default now(),
     USERID varchar(30),
     CATEGORY varchar(30)
 );
 alter table board modify BOARDDATE datetime default now();
+alter table board add (SIDETITLE varchar(250));
 
 create table board_file(
 	FILENUM int auto_increment primary key,
@@ -99,7 +101,12 @@ from board natural join board_file
 group by BOARDNUM
 order by BOARDNUM desc;
 
-
+/* 중복제거 개선*/
+select b.BOARDNUM,b.BOARDTITLE,b.BOARDCONTENT,b.BOARDDATE,b.USERID,b.CATEGORY,bfile.url
+from board b left outer join board_file bfile on b.boardnum=bfile.boardnum
+group by b.BOARDNUM
+order by b.BOARDNUM desc
+limit 0,10;
 
 
 

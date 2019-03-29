@@ -27,6 +27,7 @@ import com.google.gson.JsonObject;
 import com.pknu.blog.dao.MainDao;
 import com.pknu.blog.dto.BoardDto;
 import com.pknu.blog.dto.BoardFileDto;
+import com.pknu.blog.dto.Criteria;
 import com.pknu.blog.dto.MemberAuthDto;
 import com.pknu.blog.dto.MemberDto;
 
@@ -151,6 +152,17 @@ public class MainServiceImpl implements MainService {
 		});
 	}
 	
-	
+	@Override
+	public int getTotal() {
+		// TODO Auto-generated method stub
+		return mainDao.getTotla();
+	}
+
+	@Override
+	public List<BoardDto> getList(Criteria cri) {
+		List<BoardDto>listBoard=mainDao.getBoard(cri);
+		System.out.println("listBoard:"+listBoard);
+		return listBoard;
+	}
 
 }

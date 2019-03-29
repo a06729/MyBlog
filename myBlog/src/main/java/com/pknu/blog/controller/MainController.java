@@ -27,19 +27,28 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.JsonObject;
 import com.pknu.blog.dto.BoardDto;
 import com.pknu.blog.dto.BoardFileDto;
+import com.pknu.blog.dto.Criteria;
 import com.pknu.blog.dto.MemberAuthDto;
 import com.pknu.blog.dto.MemberDto;
+import com.pknu.blog.dto.PageDto;
 import com.pknu.blog.service.MainService;
 
 
 @Controller
 public class MainController {
 	@Autowired
-	private MainService mainervice;
+	private MainService mainService;
 	
 	@RequestMapping(value="/",method=RequestMethod.GET)
-	public String index() {
-
+	public String index(Criteria cri,Model model) {
+		int total=mainService.getTotal();
+		List<BoardDto>boardList=mainService.getList(cri);
+		
+		System.out.println("total:"+total);
+		
+		model.addAttribute("boarDto",boardList);
+		model.addAttribute("pageMaker",new PageDto(total, cri));
+		
 		return "index";
 	}
 	@GetMapping("/member")
@@ -61,7 +70,7 @@ public class MainController {
 	//회원가입 기능구현
 	@PostMapping("/sing")
 	public void sing(MemberDto memberDto,MemberAuthDto memberAuthDto){
-		mainervice.memberSing(memberDto,memberAuthDto);
+		mainService.memberSing(memberDto,memberAuthDto);
 	}
 	
 	//게시판 글쓰기 페이지로 이동
@@ -72,7 +81,9 @@ public class MainController {
 	//게시판 글쓰기
 	@PostMapping("/boardWrite")
 	public String boardWrite(BoardDto boardDto){
-		mainervice.insertWrite(boardDto);
+		mainService.insertWrite(boardDto);
+		System.out.println(boardDto.getBoardTitle());
+		System.out.println(boardDto.getSideTitle());
 		return "redirect:/";
 	}
 	//이미지 업로드
@@ -81,7 +92,7 @@ public class MainController {
 	public BoardFileDto boardImage(BoardDto boardDto,BoardFileDto fileDto,MultipartHttpServletRequest mtfRequest,
 			HttpServletResponse res) {
 		System.out.println("이미지 업로드");
-		fileDto=mainervice.boardImage(fileDto,mtfRequest);
+		fileDto=mainService.boardImage(fileDto,mtfRequest);
 		
 		return fileDto;
 	}
@@ -98,7 +109,7 @@ public class MainController {
 //			System.out.println("date["+i+"]:"+date[i]);
 //		}
 
-		return mainervice.deletFile(date,original_File_Name,stored_File_Name,boardFileDto,req);
+		return mainService.deletFile(date,original_File_Name,stored_File_Name,boardFileDto,req);
 	}
 	
 	@GetMapping("/accessError")

@@ -94,6 +94,7 @@
 				<div class="contentArea">
 					<div class="userInput">
 						<input name="boardTitle" type="text" placeholder="제목"> 
+						<input name="sideTitle" type="text" placeholder="부제목"> 
 						<select
 							name="category" class="select-css"
 							style="margin-top: 10px; margin-bottom: 10px;">

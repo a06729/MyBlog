@@ -15,6 +15,7 @@ public class BoardDto {
 	private int boardNum;
 	private String boardTitle;
 	private String boardContent;
+	private String sideTitle;
 	private Date boardDate;
 	private String userId;
 	private String category;
@@ -68,16 +69,17 @@ public class BoardDto {
 	public void setAttachList(List<BoardFileDto> attachList) {
 		this.attachList = attachList;
 	}
+	public String getSideTitle() {
+		return sideTitle;
+	}
+	public void setSideTitle(String sideTitle) {
+		this.sideTitle = sideTitle;
+	}
 	@Override
 	public String toString() {
 		return "BoardDto [boardNum=" + boardNum + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", boardDate=" + boardDate + ", userId=" + userId + ", category=" + category + ", url=" + url
-				+ ", attachList=" + attachList + "]";
+				+ ", sideTitle=" + sideTitle + ", boardDate=" + boardDate + ", userId=" + userId + ", category="
+				+ category + ", url=" + url + ", attachList=" + attachList + "]";
 	}
-	
-	
-	
-	
-	
 	
 }

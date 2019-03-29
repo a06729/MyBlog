@@ -24,12 +24,33 @@
 		where mem.userid=#{userId}
 	</select>
 	
+	<select id="getTotla" resultType="int">
+		select count(*)
+		from board
+	</select>
+	
+<!-- 	<select id="getBoard" parameterType="criteria" resultType="boardDto"> -->
+<!-- 		select BOARDNUM,BOARDTITLE,SIDETITLE,BOARDCONTENT,BOARDDATE,USERID,CATEGORY,URL -->
+<!-- 		from board natural join board_file -->
+<!-- 		group by BOARDNUM -->
+<!-- 		order by BOARDNUM desc -->
+<!-- 		limit #{pageStart},#{amount} -->
+<!-- 	</select> -->
+	
+	<select id="getBoard" parameterType="criteria" resultType="boardDto">
+		select b.BOARDNUM,b.BOARDTITLE,b.BOARDCONTENT,b.BOARDDATE,b.USERID,b.CATEGORY,bfile.url
+		from board b left outer join board_file bfile on b.boardnum=bfile.boardnum
+		group by b.BOARDNUM
+		order by b.BOARDNUM desc
+		limit #{pageStart},#{amount}
+	</select>
+	
 	<insert id="insertSelectKey" parameterType="boardDto">
-		insert into board(BOARDTITLE,BOARDCONTENT,USERID,CATEGORY) 
-		values(#{boardTitle},#{boardContent},#{userId},#{category})
+		insert into board(BOARDTITLE,BOARDCONTENT,SIDETITLE,USERID,CATEGORY) 
+		values(#{boardTitle},#{boardContent},#{sideTitle},#{userId},#{category})
 		<selectKey resultType="int"  keyProperty="boardNum" order="AFTER" keyColumn="BOARDNUM">
 			select LAST_INSERT_ID() 
-			from DUAL;
+			from DUAL
 		</selectKey>
 	</insert>
 	
