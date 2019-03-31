@@ -33,6 +33,7 @@ import com.pknu.blog.dto.MemberDto;
 
 @Service
 public class MainServiceImpl implements MainService {
+
 	@Autowired
 	private MainDao mainDao;
 	
@@ -164,5 +165,13 @@ public class MainServiceImpl implements MainService {
 		System.out.println("listBoard:"+listBoard);
 		return listBoard;
 	}
+	
+	@Override
+	public BoardDto getContent(int boardNum) {
+		BoardDto boardDto;
+		boardDto=mainDao.getContent(boardNum);
+		return boardDto;
+	}
+
 
 }

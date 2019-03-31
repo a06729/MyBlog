@@ -112,11 +112,20 @@ public class MainController {
 		return mainService.deletFile(date,original_File_Name,stored_File_Name,boardFileDto,req);
 	}
 	
+	@GetMapping("/contentPage")
+	public String contentPage(@RequestParam("boardNum")int boardNum,Model model) {
+		BoardDto boardDto;
+		boardDto=mainService.getContent(boardNum);
+		model.addAttribute("boardDto",boardDto);
+		return "contentPage";
+	}
+	
+	
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth,Model model) {
 		model.addAttribute("msg","Access Denied");
 	}
-	
+	//로그인페이지로 이동
 	@GetMapping("loginPage")
 	public void loginPage(String error,String logout,Model model) {
 		if(error != null) {

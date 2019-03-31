@@ -27,4 +27,6 @@ public interface MainDao {
 
 	public List<BoardDto> getBoard(Criteria cri);
 
+	public BoardDto getContent(int boardNum);
+
 }

@@ -264,57 +264,25 @@ i.fi-social-tumblr {
 	<div class="row">
 		<div id="mixedSlider" class="medium-12 columns">
 			<div class="MS-content">
-				<div class="item">
-					<div class="imgTitle">
-						<h2 class="blogTitle">Animals</h2>
-						<img src="https://placeimg.com/500/300/animals" alt="" />
+				<c:forEach var="list" items="${boarDto}" begin="0" end="5">
+					<div class="item">
+						<div class="imgTitle">
+								<h2 class="blogTitle">${list.boardTitle}</h2>
+								<c:choose>
+										<c:when test="${list.url eq null}">
+											<img src="http://placehold.it/500x300"
+											alt="image for article" alt="article preview image">
+										</c:when>
+										<c:when test="${list.url ne null}">
+											<img src="${list.url}" style="width: 500px; height: 300px;"
+											alt="image for article" alt="article preview image">
+										</c:when>
+								</c:choose>
+							</div>
+						<p>${list.sideTitle}</p>
+						<a href="/contentPage?boardNum=${list.boardNum}">자세히 보기</a>
 					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Vestibulum ac tellus ex. Integer eu fringilla nisi. Donec id
-						dapibus mauris, eget dignissim turpis ...</p>
-					<a href="#">Read More</a>
-				</div>
-				<div class="item">
-					<div class="imgTitle">
-						<h2 class="blogTitle">Arch</h2>
-						<img src="https://placeimg.com/500/300/arch" alt="" />
-					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Vestibulum ac tellus ex. Integer eu fringilla nisi. Donec id
-						dapibus mauris, eget dignissim turpis ...</p>
-					<a href="#">Read More</a>
-				</div>
-				<div class="item">
-					<div class="imgTitle">
-						<h2 class="blogTitle">Nature</h2>
-						<img src="https://placeimg.com/500/300/nature" alt="" />
-					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Vestibulum ac tellus ex. Integer eu fringilla nisi. Donec id
-						dapibus mauris, eget dignissim turpis ...</p>
-					<a href="#">Read More</a>
-				</div>
-				<div class="item">
-					<div class="imgTitle">
-						<h2 class="blogTitle">People</h2>
-						<img src="https://placeimg.com/500/300/people" alt="" />
-					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Vestibulum ac tellus ex. Integer eu fringilla nisi. Donec id
-						dapibus mauris, eget dignissim turpis ...</p>
-					<a href="#">Read More</a>
-				</div>
-				<div class="item">
-					<div class="imgTitle">
-						<h2 class="blogTitle">Tech</h2>
-						<img src="https://placeimg.com/500/300/tech" alt="" />
-					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Vestibulum ac tellus ex. Integer eu fringilla nisi. Donec id
-						dapibus mauris, eget dignissim turpis ...</p>
-					<a href="#">Read More</a>
-				</div>
-
+				</c:forEach>
 			</div>
 			<div class="MS-controls">
 				<button class="MS-left">
@@ -344,7 +312,7 @@ i.fi-social-tumblr {
 										alt="image for article" alt="article preview image">
 									</c:when>
 									<c:when test="${list.url ne null}">
-										<img src="${list.url}"
+										<img src="${list.url}" style="width: 600px; height: 370px;"
 										alt="image for article" alt="article preview image">
 									</c:when>
 								</c:choose>
@@ -352,7 +320,7 @@ i.fi-social-tumblr {
 						</div>
 						<div class="large-6 columns">
 							<h5>
-								<a href="#">${list.boardTitle}</a>
+								<a href="/contentPage?boardNum=${list.boardNum}">${list.boardTitle}</a>
 							</h5>
 							<p>
 								<span><i class="fi-torso"> ${list.userId} &nbsp;&nbsp;</i></span> 

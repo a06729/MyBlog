@@ -29,5 +29,7 @@ public interface MainService {
 
 	List<BoardDto> getList(Criteria cri);
 
+	BoardDto getContent(int boardNum);
+
 
 }

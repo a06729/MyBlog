@@ -38,11 +38,17 @@
 <!-- 	</select> -->
 	
 	<select id="getBoard" parameterType="criteria" resultType="boardDto">
-		select b.BOARDNUM,b.BOARDTITLE,b.BOARDCONTENT,b.BOARDDATE,b.USERID,b.CATEGORY,bfile.url
+		select b.BOARDNUM,b.BOARDTITLE,b.SIDETITLE,b.BOARDCONTENT,b.BOARDDATE,b.USERID,b.CATEGORY,bfile.url
 		from board b left outer join board_file bfile on b.boardnum=bfile.boardnum
 		group by b.BOARDNUM
 		order by b.BOARDNUM desc
 		limit #{pageStart},#{amount}
+	</select>
+	
+	<select id="getContent" parameterType="int" resultType="boardDto">
+		select * 
+		from board
+		where BOARDNUM=#{boardNum};
 	</select>
 	
 	<insert id="insertSelectKey" parameterType="boardDto">
