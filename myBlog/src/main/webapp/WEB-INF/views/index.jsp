@@ -333,7 +333,7 @@ i.fi-social-tumblr {
 				</c:forEach>
 				<ul class="pagination" role="navigation" aria-label="Pagination">
 					<c:if test="${pageMaker.prev}">
-						<li class="paginate_button pagination-previous"><a href="${pageMaker.starPage-1}">Previous <span class="show-for-sr">page</span></a></li>
+						<li class="paginate_button pagination-previous"><a href="${pageMaker.startPage-1}">Previous <span class="show-for-sr">page</span></a></li>
 					</c:if>
 				
 					<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
@@ -451,6 +451,11 @@ i.fi-social-tumblr {
 				</div>
 			</aside>
 		</div>
+		<div class="large-12 columns">
+			<article>
+				<div id="disqus_thread"></div>
+			</article>
+		</div>
 	</div>
 	<footer>
 		<div class="row expanded callout secondary">
@@ -488,5 +493,23 @@ i.fi-social-tumblr {
     		actionForm.submit();
     	});
   	</script>
+	<script>
+	
+	/**
+	*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+	*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+	
+	var disqus_config = function () {
+//	this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+	this.page.identifier = "\{\{ / }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+	(function() { // DON'T EDIT BELOW THIS LINE
+	var d = document, s = d.createElement('script');
+	s.src = 'https://test-4zksygpoh9.disqus.com/embed.js';
+	s.setAttribute('data-timestamp', +new Date());
+	(d.head || d.body).appendChild(s);
+	})();
+	</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </body>
 </html>

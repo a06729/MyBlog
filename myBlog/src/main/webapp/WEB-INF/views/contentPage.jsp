@@ -208,6 +208,12 @@ i.fi-social-tumblr {
 					</div>
 				</div>
 			</aside>
+			<input type="hidden" name="boardNum" id="boardNum" value="${boardDto.boardNum}">
+		</div>
+		<div class="large-12 columns">
+			<article>
+				<div id="disqus_thread"></div>
+			</article>
 		</div>
 	</div>
 	<footer>
@@ -235,5 +241,27 @@ i.fi-social-tumblr {
     		actionForm.submit();
     	});
   	</script>
+  	
+  	<script>
+	let boardNum=document.querySelector("#boardNum");
+	/**
+	*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+	*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+	/*	*/
+	var disqus_config = function () {
+	var num=boardNum.value;
+//	this.page.url = '/contentPage?boardNum='+num;  // Replace PAGE_URL with your page's canonical URL variable
+	this.page.identifier = "\{\{ /contentPage?boardNum="+num+" }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	
+	};
+
+	(function() { // DON'T EDIT BELOW THIS LINE
+	var d = document, s = d.createElement('script');
+	s.src = 'https://test-4zksygpoh9.disqus.com/embed.js';
+	s.setAttribute('data-timestamp', +new Date());
+	(d.head || d.body).appendChild(s);
+	})();
+	</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </body>
 </html>
