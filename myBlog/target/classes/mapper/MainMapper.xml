@@ -18,6 +18,17 @@
 		<result property="auth" column="auth"/>
 	</resultMap>
 	
+	<resultMap type="com.pknu.blog.dto.BoardFileDto" id="FileMap">
+		<id property="boardNum" column="boardNum"/>
+		<result property="fileNum" column="FILENUM"/>
+		<result property="boardNum" column="BOARDNUM"/>
+		<result property="original_File_Name" column="ORIGINAL_FILE_NAME"/>
+		<result property="stored_File_Name" column="STORED_FILE_NAME"/>
+		<result property="file_Size" column="FILE_SIZE"/>
+		<result property="filePath" column="FILEPATH"/>
+		<result property="url" column="URL"/>
+	</resultMap>
+	
 	<select id="read" resultMap="memberMap">
 		select mem.userid,userpw,username,enabled,regdate,updatedate,auth
 		from member mem LEFT OUTER JOIN member_auth auth on mem.userid=auth.userid
@@ -38,7 +49,7 @@
 <!-- 	</select> -->
 	
 	<select id="getBoard" parameterType="criteria" resultType="boardDto">
-		select b.BOARDNUM,b.BOARDTITLE,b.SIDETITLE,b.BOARDCONTENT,b.BOARDDATE,b.USERID,b.CATEGORY,bfile.url
+		select b.BOARDNUM,b.BOARDTITLE,b.SIDETITLE,b.BOARDCONTENT,b.BOARDDATE,b.USERID,b.USERNAME,b.CATEGORY,b.VIEWCOUNT,bfile.url
 		from board b left outer join board_file bfile on b.boardnum=bfile.boardnum
 		group by b.BOARDNUM
 		order by b.BOARDNUM desc
@@ -51,19 +62,62 @@
 		where BOARDNUM=#{boardNum};
 	</select>
 	
+	<select id="selectName" parameterType="String" resultType="String">
+		select USERNAME
+		from member
+		where USERID=#{userId}
+	</select>
+	
 	<insert id="insertSelectKey" parameterType="boardDto">
-		insert into board(BOARDTITLE,BOARDCONTENT,SIDETITLE,USERID,CATEGORY) 
-		values(#{boardTitle},#{boardContent},#{sideTitle},#{userId},#{category})
+		insert into board(BOARDTITLE,BOARDCONTENT,SIDETITLE,USERID,USERNAME,CATEGORY) 
+		values(#{boardTitle},#{boardContent},#{sideTitle},#{userId},#{userName},#{category})
 		<selectKey resultType="int"  keyProperty="boardNum" order="AFTER" keyColumn="BOARDNUM">
 			select LAST_INSERT_ID() 
 			from DUAL
 		</selectKey>
 	</insert>
 	
+	<select id="getBoardEdit" parameterType="boardDto" resultType="boardDto">
+		select *
+		from board
+		where BOARDNUM=#{boardNum}
+	</select>
+	
+	<select id="getAttachEdit" resultMap="FileMap">
+		select FILENUM,BOARDNUM,ORIGINAL_FILE_NAME,STORED_FILE_NAME,FILE_SIZE,FILEPATH,URL
+		from board_file
+		where BOARDNUM=#{boardNum}
+	</select>
+	
 	<insert id="insertAttach" parameterType="boardFileDto">
 		insert into board_file(BOARDNUM,ORIGINAL_FILE_NAME,STORED_FILE_NAME,FILE_SIZE,FILEPATH,URL)
 		values(#{boardNum},#{original_File_Name},#{stored_File_Name},#{file_Size},#{filePath},#{url})
 	</insert>
+	
+	<update id="viewUp" parameterType="int">
+			UPDATE board
+			SET ViewCount=ViewCount+1
+			WHERE BOARDNUM=#{boardNum}
+	</update>
+	
+	<update id="boardModify" parameterType="boardDto">
+		UPDATE board
+		set BOARDTITLE=#{boardTitle},SIDETITLE=#{sideTitle},BOARDCONTENT=#{boardContent},USERID=#{userId},USERNAME=#{userName},CATEGORY=#{category}
+		where BOARDNUM=#{boardNum}
+	</update>
+	
+	
+<!-- 	<update id="attachModify" parameterType="boardFileDto"> -->
+<!-- 		UPDATE board_file -->
+<!-- 		set ORIGINAL_FILE_NAME=#{original_File_Name},STORED_FILE_NAME=#{stored_File_Name},FILE_SIZE=#{file_Size},FILEPATH=#{filePath},URL=#{url} -->
+<!-- 		where BOARDNUM=#{boardNum} -->
+<!-- 	</update> -->
+	
+	<delete id="boardDelete" parameterType="int">
+		delete
+		from board
+		where BOARDNUM=#{boardNum};
+	</delete>
 	
 	<insert id="memberSing" parameterType="map">
 		insert into member(userid,userpw,username) values(#{memberDto.userId},#{memberDto.userPw},#{memberDto.userName})

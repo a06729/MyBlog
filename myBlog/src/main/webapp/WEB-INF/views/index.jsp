@@ -267,20 +267,20 @@ i.fi-social-tumblr {
 				<c:forEach var="list" items="${boarDto}" begin="0" end="5">
 					<div class="item">
 						<div class="imgTitle">
-								<h2 class="blogTitle">${list.boardTitle}</h2>
+								<h5 class="blogTitle">${list.boardTitle}</h5>
 								<c:choose>
 										<c:when test="${list.url eq null}">
 											<img src="http://placehold.it/500x300"
 											alt="image for article" alt="article preview image">
 										</c:when>
 										<c:when test="${list.url ne null}">
-											<img src="${list.url}" style="width: 500px; height: 300px;"
+											<img src="${list.url}" style="width: 500px;"
 											alt="image for article" alt="article preview image">
 										</c:when>
 								</c:choose>
 							</div>
 						<p>${list.sideTitle}</p>
-						<a href="/contentPage?boardNum=${list.boardNum}">자세히 보기</a>
+						<a href="/contentPage?boardNum=${list.boardNum}&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}">자세히 보기</a>
 					</div>
 				</c:forEach>
 			</div>
@@ -312,7 +312,7 @@ i.fi-social-tumblr {
 										alt="image for article" alt="article preview image">
 									</c:when>
 									<c:when test="${list.url ne null}">
-										<img src="${list.url}" style="width: 600px; height: 370px;"
+										<img src="${list.url}" style="width: 350px; height: 150px;"
 										alt="image for article" alt="article preview image">
 									</c:when>
 								</c:choose>
@@ -320,11 +320,12 @@ i.fi-social-tumblr {
 						</div>
 						<div class="large-6 columns">
 							<h5>
-								<a href="/contentPage?boardNum=${list.boardNum}">${list.boardTitle}</a>
+								<a href="/contentPage?boardNum=${list.boardNum}&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}">${list.boardTitle}</a>
 							</h5>
 							<p>
-								<span><i class="fi-torso"> ${list.userId} &nbsp;&nbsp;</i></span> 
-								<span><i class="fi-calendar"> ${list.boardDate} &nbsp;&nbsp;</i></span> 
+								<span><i class="fi-torso"> ${list.userName} &nbsp;&nbsp;</i></span> 
+								<span><i class="fi-calendar"> ${list.boardDate} &nbsp;&nbsp;</i></span>
+								<span><i class="fi-comments">조회수:${list.viewCount}</i></span> 
 							</p>
 							<p id="content">${list.sideTitle}</p>
 						</div>
@@ -492,6 +493,7 @@ i.fi-social-tumblr {
     		
     		actionForm.submit();
     	});
+    	
   	</script>
 	<script>
 	

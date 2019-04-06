@@ -18,9 +18,12 @@ public class BoardDto {
 	private String sideTitle;
 	private Date boardDate;
 	private String userId;
+	private String userName;
 	private String category;
 	private String url;
+	private int viewCount;
 	private List<BoardFileDto> attachList;
+
 	public int getBoardNum() {
 		return boardNum;
 	}
@@ -39,6 +42,12 @@ public class BoardDto {
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
+	public String getSideTitle() {
+		return sideTitle;
+	}
+	public void setSideTitle(String sideTitle) {
+		this.sideTitle = sideTitle;
+	}
 	public Date getBoardDate() {
 		return boardDate;
 	}
@@ -50,6 +59,12 @@ public class BoardDto {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getCategory() {
 		return category;
@@ -63,23 +78,27 @@ public class BoardDto {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	public int getViewCount() {
+		return viewCount;
+	}
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
 	public List<BoardFileDto> getAttachList() {
 		return attachList;
 	}
 	public void setAttachList(List<BoardFileDto> attachList) {
 		this.attachList = attachList;
 	}
-	public String getSideTitle() {
-		return sideTitle;
-	}
-	public void setSideTitle(String sideTitle) {
-		this.sideTitle = sideTitle;
-	}
 	@Override
 	public String toString() {
 		return "BoardDto [boardNum=" + boardNum + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", sideTitle=" + sideTitle + ", boardDate=" + boardDate + ", userId=" + userId + ", category="
-				+ category + ", url=" + url + ", attachList=" + attachList + "]";
+				+ ", sideTitle=" + sideTitle + ", boardDate=" + boardDate + ", userId=" + userId + ", userName="
+				+ userName + ", category=" + category + ", url=" + url + ", viewCount=" + viewCount + ", attachList="
+				+ attachList + "]";
 	}
+	
+	
+	
 	
 }

@@ -16,7 +16,8 @@
 	
 	<security:http >
 		<security:intercept-url pattern="/" access="permitAll"/>
-		<security:intercept-url pattern="/boardWrite" access="permitAll"/>
+		<security:intercept-url pattern="/boardWrite" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/boardPage" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/member" access="hasRole('ROLE_MEMBER')"/>
 		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
 		<security:form-login login-page="/loginPage" authentication-success-handler-ref="customLoginSuccessHandler"/>

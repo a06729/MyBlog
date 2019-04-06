@@ -1,10 +1,11 @@
 package com.pknu.blog.dto;
 
-import java.util.List;
-
 import org.apache.ibatis.type.Alias;
 
+import lombok.Data;
+
 @Alias("boardFileDto")
+@Data
 public class BoardFileDto {
 	private int fileNum;
 	private int boardNum;
@@ -13,7 +14,6 @@ public class BoardFileDto {
 	private long file_Size;
 	private String filePath;
 	private String url;
-
 	public int getFileNum() {
 		return fileNum;
 	}

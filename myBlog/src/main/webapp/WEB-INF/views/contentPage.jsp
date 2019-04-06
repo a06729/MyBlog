@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,6 +87,37 @@ i.fi-social-tumblr {
 				<div class="row">
 					<div class="large-12 columns">
 						${boardDto.boardContent}
+					</div>
+					
+					<div class="row align-center">
+						<c:if test="${boardDto.userId==userId}">
+							<form action="/boardDelete" method="post">
+								<div class="column small-4">
+									<input type="hidden" name="pageNum" value="${cri.pageNum}">
+									<input type="hidden" name="amount" value="${cri.amount}">
+									<input id="boardNum" name="boardNum" type="hidden" value='<c:out value="${boardDto.boardNum}"></c:out>'>
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+									<input type="submit" value="삭제">
+								</div>
+							</form>
+						</c:if>
+						<c:if test="${boardDto.userId==userId}">
+							<form action="/boardEditPage" method="get">
+								<div class="column small-4">
+									<input type="hidden" name="pageNum" value="${cri.pageNum}">
+									<input type="hidden" name="amount" value="${cri.amount}">
+									<input id="boardNum" name="boardNum" type="hidden" value='<c:out value="${boardDto.boardNum}"></c:out>'>
+									<input type="submit" value="수정">
+								</div>
+							</form>
+						</c:if>
+						<form action="/" method="get">
+							<div class="column small-4">
+								<input type="hidden" name="pageNum" value="${cri.pageNum}">
+								<input type="hidden" name="amount" value="${cri.amount}">
+								<input type="submit" value="목록">
+							</div>
+						</form>
 					</div>
 				</div>
 				<hr>

@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -140,8 +141,12 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
-	public void insertWrite(BoardDto boardDto) {
-		boardDto.setUserId("a06729");//일단a06729를 아이디로 입력
+	public void insertWrite(BoardDto boardDto,Principal principal) {
+		String userId=principal.getName();
+		
+		boardDto.setUserId(userId);
+		boardDto.setUserName(mainDao.selectName(userId));
+		
 		mainDao.insertSelectKey(boardDto);	
 		
 		if(boardDto.getAttachList()==null||boardDto.getAttachList().size()<=0) {
@@ -153,6 +158,49 @@ public class MainServiceImpl implements MainService {
 		});
 	}
 	
+	@Override
+	public void boardModify(BoardDto boardDto,Principal principal) {
+		String userId=principal.getName();
+		
+		boardDto.setUserId(userId);
+		boardDto.setUserName(mainDao.selectName(userId));
+		
+		mainDao.boardModify(boardDto);
+		
+		if(boardDto.getAttachList()==null||boardDto.getAttachList().size()<=0) {
+			return;
+		}
+		boardDto.getAttachList().forEach(attach->{
+			attach.setBoardNum(boardDto.getBoardNum());
+			System.out.println("attach:"+attach);
+			mainDao.insertAttach(attach);
+		});
+	}
+
+	
+	@Override
+	public Map<String, Object> getBoardEdit(BoardDto boardDto,BoardFileDto boardFileDto) {	
+		Map<String ,Object>BoardMap=new HashMap<>();
+		
+		boardDto=mainDao.getBoardEdit(boardDto);
+		BoardMap.put("boardDto",boardDto);
+		
+//		boardFileDto.setBoardNum(boardDto.getBoardNum());
+		
+//		List<BoardFileDto>fileList=mainDao.getAttachEdit(boardFileDto);
+		
+//		boardDto.setAttachList(mainDao.getAttachEdit(boardFileDto));
+		
+//		System.out.println("fileList:"+boardDto.getAttachList());
+		
+
+//		BoardMap.put("attachFile", boardDto.getAttachList());		
+	
+		
+		return BoardMap;
+	}
+	
+
 	@Override
 	public int getTotal() {
 		// TODO Auto-generated method stub
@@ -167,11 +215,25 @@ public class MainServiceImpl implements MainService {
 	}
 	
 	@Override
+	public void viewUp(int boardNum) {
+		mainDao.viewUp(boardNum);
+	}
+	
+	@Override
 	public BoardDto getContent(int boardNum) {
 		BoardDto boardDto;
 		boardDto=mainDao.getContent(boardNum);
 		return boardDto;
 	}
+
+	@Override
+	public void boardDelete(int boardNum) {
+		mainDao.boardDelete(boardNum);
+		
+	}
+	
+	
+
 
 
 }

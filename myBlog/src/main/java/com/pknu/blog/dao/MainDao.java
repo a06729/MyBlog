@@ -29,4 +29,18 @@ public interface MainDao {
 
 	public BoardDto getContent(int boardNum);
 
+	public void viewUp(int boardNum);
+
+	public String selectName(String userId);
+
+	public void boardDelete(int boardNum);
+
+	public BoardDto getBoardEdit(BoardDto boardDto);
+
+	public List<BoardFileDto> getAttachEdit(BoardFileDto boardFileDto);
+
+	public void boardModify(BoardDto boardDto);
+
+//	public void attachModify(BoardFileDto attach);
+
 }

@@ -2,19 +2,25 @@ package com.pknu.blog.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.ProcessBuilder.Redirect;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonObject;
 import com.pknu.blog.dto.BoardDto;
@@ -36,6 +43,8 @@ import com.pknu.blog.service.MainService;
 
 @Controller
 public class MainController {
+	public static final Logger log=LoggerFactory.getLogger(MainController.class);
+	
 	@Autowired
 	private MainService mainService;
 	
@@ -80,10 +89,10 @@ public class MainController {
 	}
 	//게시판 글쓰기
 	@PostMapping("/boardWrite")
-	public String boardWrite(BoardDto boardDto){
-		mainService.insertWrite(boardDto);
-		System.out.println(boardDto.getBoardTitle());
-		System.out.println(boardDto.getSideTitle());
+	public String boardWrite(BoardDto boardDto,Principal principal){
+		mainService.insertWrite(boardDto,principal);
+//		System.out.println(boardDto.getBoardTitle());
+//		System.out.println(boardDto.getSideTitle());
 		return "redirect:/";
 	}
 	//이미지 업로드
@@ -112,15 +121,86 @@ public class MainController {
 		return mainService.deletFile(date,original_File_Name,stored_File_Name,boardFileDto,req);
 	}
 	
+	//게시판 글 보기
 	@GetMapping("/contentPage")
-	public String contentPage(@RequestParam("boardNum")int boardNum,Model model) {
+	public String contentPage(HttpServletRequest req,HttpServletResponse res,
+			                  @RequestParam("boardNum")int boardNum,Criteria cri,
+			                  Model model,Principal principal) {
 		BoardDto boardDto;
 		boardDto=mainService.getContent(boardNum);
-		model.addAttribute("boardDto",boardDto);
+		
+		Cookie[] cookies=req.getCookies();
+		Cookie viewCookie=null;
+
+		
+		if(cookies!=null && cookies.length>0) {
+			for(int i=0; i<cookies.length; i++) {
+				if(cookies[i].getName().equals("cookie"+boardNum)) {
+					log.info("처음 쿠키가 생성한 뒤 들어옴.");
+					viewCookie=cookies[i];
+				}
+				
+			}
+		}
+		
+		if(boardDto !=null) {
+			
+			if(viewCookie==null) {
+				log.info("cookie 없음");
+				
+				Cookie newCookie=new Cookie("cookie"+boardNum,"|"+boardNum+"|");
+				
+				res.addCookie(newCookie);
+				mainService.viewUp(boardNum);
+			}else {
+				log.info("cookie 있음");
+				
+				String value=viewCookie.getValue();
+				
+				log.info("cookie 값:"+value);
+			}
+			try {
+				String pUserId=principal.getName();
+				if(pUserId!=null && pUserId!="") {
+					log.info("pUserId:"+pUserId);
+					model.addAttribute("boardDto",boardDto);
+					model.addAttribute("userId",principal.getName());
+					model.addAttribute("cri",cri);
+				}
+			}catch (NullPointerException e) {
+					log.info(e.getClass()+e.getMessage());
+					model.addAttribute("boardDto",boardDto);
+					model.addAttribute("cri",cri);
+			}
+
+		}
+		
 		return "contentPage";
 	}
+	@PostMapping("/boardDelete")
+	public String boardDelete(@RequestParam("boardNum")int boardNum,
+							  @ModelAttribute("cri")Criteria cri,RedirectAttributes rttr) {
+		mainService.boardDelete(boardNum);
+		
+		rttr.addAttribute("pageNum",cri.getPageNum());
+		rttr.addAttribute("pageNum",cri.getAmount());
+		return "redirect:/";
+	}
 	
+	@GetMapping("/boardEditPage")
+	public String boardEditPage(BoardDto boardDto,BoardFileDto BoardFileDto,Model model) {
+		Map<String,Object>BoardMap=mainService.getBoardEdit(boardDto,BoardFileDto);
+		
+		model.addAttribute("boardDto",BoardMap.get("boardDto"));
+//		model.addAttribute("attachFile",BoardMap.get("attachFile"));
+		
+		return "boardEditPage";
+	}
 	
+	@PostMapping("/boardModify")
+	public void boardModify(BoardDto boardDto,Principal principal) {
+		mainService.boardModify(boardDto,principal);
+	}
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth,Model model) {
 		model.addAttribute("msg","Access Denied");

@@ -1,5 +1,6 @@
 package com.pknu.blog.service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -23,13 +24,22 @@ public interface MainService {
 
 	BoardFileDto deletFile(String[] date, String original_File_Name, String stored_File_Name, BoardFileDto boardFileDto, HttpServletRequest req);
 
-	void insertWrite(BoardDto boardDto);
+	void insertWrite(BoardDto boardDto, Principal principal);
 
 	int getTotal();
 
 	List<BoardDto> getList(Criteria cri);
 
 	BoardDto getContent(int boardNum);
+
+	void viewUp(int boardNum);
+
+	void boardDelete(int boardNum);
+
+	Map<String, Object> getBoardEdit(BoardDto boardDto,BoardFileDto boardFileDto);
+
+	void boardModify(BoardDto boardDto, Principal principal);
+
 
 
 }
