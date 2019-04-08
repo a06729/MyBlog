@@ -6,7 +6,11 @@ import org.apache.ibatis.type.Alias;
 public class Criteria {
 	private int pageNum;//시작 페이지 번호 (1)
  	private int amount;//한페이지에 보여줄 양(10)
- 	public Criteria() {
+ 	
+ 	private String type;
+ 	private String keyword;
+ 	
+	public Criteria() {
 		this(1,10);
 	}
 	
@@ -41,12 +45,30 @@ public class Criteria {
 		return (this.pageNum-1)*amount;
 	}
 	
-	
+ 	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
 	@Override
 	public String toString() {
-		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + "]";
+		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", type=" + type + ", keyword=" + keyword + "]";
 	}
-	
+
+	public String[] getTypeArr() {
+		return type==null?new String[] {}:type.split("");
+	}
 	
 	
 	

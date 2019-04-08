@@ -10,6 +10,7 @@ import com.pknu.blog.dto.BoardDto;
 import com.pknu.blog.dto.BoardFileDto;
 import com.pknu.blog.dto.Criteria;
 import com.pknu.blog.dto.MemberDto;
+
 @Repository
 public interface MainDao {
 
@@ -41,6 +42,9 @@ public interface MainDao {
 
 	public void boardModify(BoardDto boardDto);
 
-//	public void attachModify(BoardFileDto attach);
+	public int serchCount(Criteria cri);
+
+	public List<BoardDto> serchList(Criteria cri);
+
 
 }

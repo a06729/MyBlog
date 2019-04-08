@@ -231,6 +231,18 @@ public class MainServiceImpl implements MainService {
 		mainDao.boardDelete(boardNum);
 		
 	}
+
+	@Override
+	public int serchCount(Criteria cri) {
+		return mainDao.serchCount(cri);
+	}
+
+	@Override
+	public List<BoardDto> serchList(Criteria cri) {
+		return mainDao.serchList(cri);
+	}
+	
+	
 	
 	
 

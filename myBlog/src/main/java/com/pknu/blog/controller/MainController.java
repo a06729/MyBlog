@@ -1,11 +1,6 @@
 package com.pknu.blog.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.ProcessBuilder.Redirect;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,16 +17,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.gson.JsonObject;
 import com.pknu.blog.dto.BoardDto;
 import com.pknu.blog.dto.BoardFileDto;
 import com.pknu.blog.dto.Criteria;
@@ -57,6 +49,12 @@ public class MainController {
 		
 		model.addAttribute("boarDto",boardList);
 		model.addAttribute("pageMaker",new PageDto(total, cri));
+		
+//		int searchCount=mainService.serchCount(cri);
+//		List<BoardDto>boardList=mainService.serchList(cri);
+//		
+//		model.addAttribute("boarDto",boardList);
+//		model.addAttribute("pageMaker",new PageDto(searchCount, cri));
 		
 		return "index";
 	}
@@ -177,6 +175,8 @@ public class MainController {
 		
 		return "contentPage";
 	}
+	
+	//글삭제 
 	@PostMapping("/boardDelete")
 	public String boardDelete(@RequestParam("boardNum")int boardNum,
 							  @ModelAttribute("cri")Criteria cri,RedirectAttributes rttr) {
@@ -187,6 +187,7 @@ public class MainController {
 		return "redirect:/";
 	}
 	
+	//글수정 페이지
 	@GetMapping("/boardEditPage")
 	public String boardEditPage(BoardDto boardDto,BoardFileDto BoardFileDto,Model model) {
 		Map<String,Object>BoardMap=mainService.getBoardEdit(boardDto,BoardFileDto);
@@ -197,10 +198,23 @@ public class MainController {
 		return "boardEditPage";
 	}
 	
+	//글수정
 	@PostMapping("/boardModify")
 	public void boardModify(BoardDto boardDto,Principal principal) {
 		mainService.boardModify(boardDto,principal);
 	}
+	
+	//검색결과
+	@GetMapping("/search")
+	public String searchList(Criteria cri,Model model) {
+		int searchCount=mainService.serchCount(cri);
+		List<BoardDto>boardList=mainService.serchList(cri);
+		
+		model.addAttribute("boarDto",boardList);
+		model.addAttribute("pageMaker",new PageDto(searchCount, cri));
+		return "searchPage";
+	}
+	
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth,Model model) {
 		model.addAttribute("msg","Access Denied");

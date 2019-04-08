@@ -40,6 +40,10 @@ public interface MainService {
 
 	void boardModify(BoardDto boardDto, Principal principal);
 
+	int serchCount(Criteria cri);
+
+	List<BoardDto> serchList(Criteria cri);
+
 
 
 }

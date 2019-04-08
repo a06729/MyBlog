@@ -40,13 +40,6 @@
 		from board
 	</select>
 	
-<!-- 	<select id="getBoard" parameterType="criteria" resultType="boardDto"> -->
-<!-- 		select BOARDNUM,BOARDTITLE,SIDETITLE,BOARDCONTENT,BOARDDATE,USERID,CATEGORY,URL -->
-<!-- 		from board natural join board_file -->
-<!-- 		group by BOARDNUM -->
-<!-- 		order by BOARDNUM desc -->
-<!-- 		limit #{pageStart},#{amount} -->
-<!-- 	</select> -->
 	
 	<select id="getBoard" parameterType="criteria" resultType="boardDto">
 		select b.BOARDNUM,b.BOARDTITLE,b.SIDETITLE,b.BOARDCONTENT,b.BOARDDATE,b.USERID,b.USERNAME,b.CATEGORY,b.VIEWCOUNT,bfile.url
@@ -89,6 +82,23 @@
 		where BOARDNUM=#{boardNum}
 	</select>
 	
+	<select id="serchList" parameterType="criteria" resultType="boardDto">
+		select b.BOARDNUM,b.BOARDTITLE,b.SIDETITLE,b.BOARDCONTENT,b.BOARDDATE,b.USERID,b.USERNAME,b.CATEGORY,b.VIEWCOUNT,bfile.url
+		from board b left outer join board_file bfile on b.boardnum=bfile.boardnum
+		where
+		<include refid="search"></include>
+		group by b.BOARDNUM
+		order by b.BOARDNUM desc
+		limit #{pageStart},#{amount}
+	</select>
+	
+	<select id="serchCount" parameterType="criteria" resultType="int">
+		select count(BOARDNUM)
+		from board
+		where
+		<include refid="search"/>
+	</select>
+	
 	<insert id="insertAttach" parameterType="boardFileDto">
 		insert into board_file(BOARDNUM,ORIGINAL_FILE_NAME,STORED_FILE_NAME,FILE_SIZE,FILEPATH,URL)
 		values(#{boardNum},#{original_File_Name},#{stored_File_Name},#{file_Size},#{filePath},#{url})
@@ -106,13 +116,6 @@
 		where BOARDNUM=#{boardNum}
 	</update>
 	
-	
-<!-- 	<update id="attachModify" parameterType="boardFileDto"> -->
-<!-- 		UPDATE board_file -->
-<!-- 		set ORIGINAL_FILE_NAME=#{original_File_Name},STORED_FILE_NAME=#{stored_File_Name},FILE_SIZE=#{file_Size},FILEPATH=#{filePath},URL=#{url} -->
-<!-- 		where BOARDNUM=#{boardNum} -->
-<!-- 	</update> -->
-	
 	<delete id="boardDelete" parameterType="int">
 		delete
 		from board
@@ -125,5 +128,25 @@
 	<insert id="memberAuth" parameterType="map">
 		insert into member_auth(userid,auth) values(#{memberAuthDto.userId},#{memberAuthDto.auth})
 	</insert>
-
+	
+	<sql id="search">
+		<trim prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<choose>
+					<when test="type=='T'.toString()">
+						OR BOARDTITLE LIKE concat('%',#{keyword},'%')
+					</when>
+					
+					<when test="type=='C'.toString()">
+						OR BOARDCONTENT LIKE concat('%',#{keyword},'%')
+					</when>
+					
+					<when test="type=='W'.toString()">
+						OR USERNAME LIKE concat('%',#{keyword},'%')
+					</when>
+				</choose>
+			</foreach>
+		</trim>
+	</sql>
+	
 </mapper>
