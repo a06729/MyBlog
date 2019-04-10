@@ -143,7 +143,8 @@ create table tbl_member(
     username varchar(100) not null,
     regdate datetime default now(),
     updatedate datetime default now(),
-    enabled char(1) default '1'
+    enabled char(1) default '1',
+    uuidUrl varchar(200)
 );
 
 create table tbl_member_auth(
@@ -160,6 +161,13 @@ create table member(
     updatedate datetime default now(),
     enabled char(1) default '1'
 );
+
+create table uuidUrl(
+	userid varchar(50),
+    uuid varchar(200),
+    constraint fk_member_uuid foreign key(userid) references member(userid)
+);
+
 
 select *
 from member;
@@ -180,3 +188,58 @@ create table member_auth(
 select mem.userid,userpw,username,enabled,regdate,updatedate,auth.auth
 from member mem LEFT OUTER JOIN member_auth auth on mem.userid=auth.userid
 where mem.userid='a06729@gmail.com';
+
+
+
+
+create table tbl_member_auth(
+	userid varchar(50) not null,
+    auth varchar(50) not null,
+    constraint fk_member_auth foreign key(userid) references tbl_member(userid)
+);
+-- 만들어진 테이블들 --
+create table member(
+	userid varchar(50) not null primary key,
+    userpw varchar(100) not null,
+    username varchar(100) not null,
+    regdate datetime default now(),
+    updatedate datetime default now(),
+    enabled char(1) default '1'
+);
+
+create table uuidUrl(
+	userid varchar(50),
+    uuid varchar(200),
+    constraint fk_member_uuid foreign key(userid) references member(userid)
+);
+
+create table board(
+	BOARDNUM int auto_increment primary key,
+    BOARDTITLE varchar(100),
+    SIDETITLE varchar(250),
+    BOARDCONTENT varchar(3000),
+    BOARDDATE datetime default now(),
+    USERID varchar(30),
+    CATEGORY varchar(30),
+    VIEWCOUNT int default 0
+);
+alter table board modify BOARDDATE datetime default now();
+alter table board add (SIDETITLE varchar(250));
+alter table board add(ViewCount int default 0);
+alter table board change ViewCount VIEWCOUNT int default 0;
+
+create table board_file(
+	FILENUM int auto_increment primary key,
+    BOARDNUM int,
+    ORIGINAL_FILE_NAME varchar(260),
+    STORED_FILE_NAME varchar(200),
+    FILE_SIZE int,
+    FILEPATH varchar(200),
+    URL varchar(1000),
+    constraint bn_fk foreign key (BOARDNUM) references board(BOARDNUM) ON DELETE CASCADE
+);
+
+
+
+
+

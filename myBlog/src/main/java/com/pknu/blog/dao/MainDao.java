@@ -2,6 +2,7 @@ package com.pknu.blog.dao;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -45,6 +46,16 @@ public interface MainDao {
 	public int serchCount(Criteria cri);
 
 	public List<BoardDto> serchList(Criteria cri);
+
+	public int IdFind(String username);
+
+	public void uuidInsert(Map<String, Object> map);
+
+	public int checkUsername(Map<String, Object> map);
+
+	public void passReset(Map<String, Object> map);
+
+	public void deleteUUID(Map<String, Object> map);
 
 
 }

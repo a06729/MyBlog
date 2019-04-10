@@ -99,6 +99,37 @@
 		<include refid="search"/>
 	</select>
 	
+	<select id="IdFind" parameterType="String" resultType="int">
+		select count(userid)
+		from member
+		where userid=#{username}
+	</select>
+	
+	<select id="checkUsername" parameterType="map" resultType="int">
+		<![CDATA[
+			select count(*)
+			from uuidUrl
+			where userid=#{username}&&uuid=#{uuid}
+		]]>
+
+	</select>
+	
+	<update id="passReset" parameterType="map">
+		UPDATE member
+		set userpw=#{Encoder}
+		where userid=#{username}
+	</update>
+	<delete id="deleteUUID" parameterType="map">
+		DELETE
+		FROM uuidUrl
+		WHERE userid=#{username}
+	</delete>
+	
+	<insert id="uuidInsert" parameterType="map">
+		insert into uuidUrl(userid,uuid)
+		values(#{username},#{uuid})
+	</insert>
+	
 	<insert id="insertAttach" parameterType="boardFileDto">
 		insert into board_file(BOARDNUM,ORIGINAL_FILE_NAME,STORED_FILE_NAME,FILE_SIZE,FILEPATH,URL)
 		values(#{boardNum},#{original_File_Name},#{stored_File_Name},#{file_Size},#{filePath},#{url})

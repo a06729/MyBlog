@@ -143,7 +143,8 @@ create table tbl_member(
     username varchar(100) not null,
     regdate datetime default now(),
     updatedate datetime default now(),
-    enabled char(1) default '1'
+    enabled char(1) default '1',
+    uuidUrl varchar(200)
 );
 
 create table tbl_member_auth(

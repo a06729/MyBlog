@@ -241,11 +241,44 @@ public class MainServiceImpl implements MainService {
 	public List<BoardDto> serchList(Criteria cri) {
 		return mainDao.serchList(cri);
 	}
-	
-	
-	
-	
 
+	@Override
+	public int IdFind(String username) {
+		return mainDao.IdFind(username);
+	}
 
+	@Override
+	public void uuidInsert(String username, UUID uuid) {
+		Map<String ,Object>map=new HashMap<>();
+		map.put("uuid",String.valueOf(uuid));
+		map.put("username",username);
+		mainDao.uuidInsert(map);
+	}
+
+	@Override
+	public boolean checkUsername(String uuid, String username) {
+		Map<String ,Object>map=new HashMap<>();
+		map.put("uuid",uuid);
+		map.put("username",username);
+		int checkCount=mainDao.checkUsername(map);
+			
+		if(checkCount>0) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public void passReset(String userPw,String username) {
+		Map<String,Object>map=new HashMap<>();
+		String Encoder=passwordEncoder.encode(userPw);
+		map.put("Encoder", Encoder);
+		map.put("username", username);
+		mainDao.passReset(map);
+		mainDao.deleteUUID(map);
+	}
+	
+	
 
 }

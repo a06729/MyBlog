@@ -3,6 +3,7 @@ package com.pknu.blog.service;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,6 +44,14 @@ public interface MainService {
 	int serchCount(Criteria cri);
 
 	List<BoardDto> serchList(Criteria cri);
+
+	int IdFind(String username);
+
+	void uuidInsert(String username, UUID uuid);
+
+	boolean checkUsername(String uuid, String username);
+
+	void passReset(String userPw, String username);
 
 
 

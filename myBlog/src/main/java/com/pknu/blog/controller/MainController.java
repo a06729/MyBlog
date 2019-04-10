@@ -3,7 +3,11 @@ package com.pknu.blog.controller;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMailMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +44,9 @@ import com.pknu.blog.service.MainService;
 public class MainController {
 	public static final Logger log=LoggerFactory.getLogger(MainController.class);
 	
+	@Autowired(required=false)
+	private JavaMailSender mailSender;
+
 	@Autowired
 	private MainService mainService;
 	
@@ -219,6 +229,7 @@ public class MainController {
 	public void accessDenied(Authentication auth,Model model) {
 		model.addAttribute("msg","Access Denied");
 	}
+	
 	//로그인페이지로 이동
 	@GetMapping("loginPage")
 	public void loginPage(String error,String logout,Model model) {
@@ -232,6 +243,67 @@ public class MainController {
 			model.addAttribute("logout","Logout!!");
 		}
 		
+	}
+	
+	//비밀번호 찾기 페이지로 이동
+	@GetMapping("/passFindPage")
+	public String passwordFindPage() {
+		return "passwordFind";
+	}
+	
+	//비밀번호 찾기 기능
+	@PostMapping("/passFind")
+	@ResponseBody
+	public int passFind(@RequestParam("username")String username) {
+		int idCount=mainService.IdFind(username);
+		if(idCount<0) {
+			log.info("아이디가 존재하지 않함");
+		}else if (idCount>=1) {
+			log.info("아이디가 존재함");
+			UUID uuid=UUID.randomUUID();
+			mainService.uuidInsert(username,uuid);
+			String setFrom="a06729@gmail.com";
+			String tomail=username;
+			String title="비밀번호 변경 링크";
+			String content=new StringBuffer().append("<a href='http://localhost:8080/passResetPage?uuid=").append(uuid).append("&username=").append(username).append("'target='_blenk''>비밀번호 초기화링크</a>").toString();
+			//<a href=\"/passResetPage&uuid="+uuid+"\">비밀번호 변경</a>	
+			try {
+				MimeMessage message=mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper=new MimeMessageHelper(message,true,"UTF-8");
+				messageHelper.setFrom(setFrom);//보내는사람 이메일
+				messageHelper.setTo(tomail);//받는사람 이메일
+				messageHelper.setSubject(title);//이메일 제목
+				messageHelper.setText("<html><body>"+content+"</body></html>",true);//이메일 내용
+				
+				mailSender.send(message);
+			}catch(Exception e){
+				log.info("e:"+e);
+			}
+		}
+		return idCount;
+	}
+	
+	//비밀번호 초기화 페이지로 이동
+	@RequestMapping(value="/passResetPage",method={RequestMethod.GET,RequestMethod.POST})
+	public String resetPage(HttpServletRequest req,Model model) {
+		String uuid=req.getParameter("uuid");
+		String username=req.getParameter("username");
+		boolean check=mainService.checkUsername(uuid,username);
+		
+		if(check==true) {
+			log.info("비밀번호 초기화 페이지 이동");
+			model.addAttribute("username",username);
+			return "passResetPage";
+		}
+		
+		return "redirect:/";
+	}
+	
+	@PostMapping("/passReset")
+	public String passReset(@RequestParam("userPw")String userPw,
+							@RequestParam("username")String username) {
+		mainService.passReset(userPw,username);
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/logout",method={RequestMethod.GET,RequestMethod.POST})

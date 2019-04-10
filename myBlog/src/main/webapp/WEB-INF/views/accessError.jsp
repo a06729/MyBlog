@@ -10,5 +10,6 @@
 <body>
 <h2><c:out value="${SPRING_SECURITY_403_EXCEPTION.getMessage()}"></c:out></h2>
 <h2><c:out value="${msg}"></c:out></h2>
+
 </body>
 </html>
