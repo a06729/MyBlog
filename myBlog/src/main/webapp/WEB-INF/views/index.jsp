@@ -264,7 +264,7 @@ i.fi-social-tumblr {
 	<div class="row">
 		<div id="mixedSlider" class="medium-12 columns">
 			<div class="MS-content">
-				<c:forEach var="list" items="${boarDto}" begin="0" end="5">
+				<c:forEach var="list" items="${boardDto}" begin="0" end="5">
 					<div class="item">
 						<div class="imgTitle">
 								<h5 class="blogTitle">${list.boardTitle}</h5>
@@ -302,7 +302,7 @@ i.fi-social-tumblr {
 	<div class="row">
 		<div class="large-8 columns" style="border-right: 1px solid #E3E5E8;">
 			<article>
-				<c:forEach var="list" items="${boarDto}">
+				<c:forEach var="list" items="${boardDto}">
 					<div class="row">
 						<div class="large-6 columns">
 							<p>
@@ -511,17 +511,16 @@ i.fi-social-tumblr {
     	let searchForm=$('#searchForm');
     	
     	$("#searchForm button").on('click',function(e){
-    		
-    		if(!searchForm.find('option:selected').val()){
-    			alter("검색종류를 선택하세요");
+    		e.preventDefault();
+    		if(!searchForm.find('option:selected').val()&&searchForm.find('option:selected').val()==""){
+    			alert("검색종류를 선택하세요");
     			return false;
     		}
-    		if(!searchForm.find("input[name='keyword']").val()){
-    			alter("키워들르 입력하세요.");
+    		if(!searchForm.find("input[name='keyword']").val()&&searchForm.find("input[name='keyword']").val()==""){
+    			alert("키워들르 입력하세요.");
     			return false;
     		}
     		searchForm.find("input[name='pageNum']").val("1");
-    		e.prevenDfault();
     		
     		searchForm.submit();
     	});

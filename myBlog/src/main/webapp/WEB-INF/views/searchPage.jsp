@@ -261,40 +261,6 @@ i.fi-social-tumblr {
 		</div>
 	</header>
 	<br>
-	<div class="row">
-		<div id="mixedSlider" class="medium-12 columns">
-			<div class="MS-content">
-				<c:forEach var="list" items="${boarDto}" begin="0" end="5">
-					<div class="item">
-						<div class="imgTitle">
-								<h5 class="blogTitle">${list.boardTitle}</h5>
-								<c:choose>
-										<c:when test="${list.url eq null}">
-											<img src="http://placehold.it/500x300"
-											alt="image for article" alt="article preview image">
-										</c:when>
-										<c:when test="${list.url ne null}">
-											<img src="${list.url}" style="width: 500px;"
-											alt="image for article" alt="article preview image">
-										</c:when>
-								</c:choose>
-							</div>
-						<p>${list.sideTitle}</p>
-						<a href="/contentPage?boardNum=${list.boardNum}&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}">자세히 보기</a>
-					</div>
-				</c:forEach>
-			</div>
-			<div class="MS-controls">
-				<button class="MS-left">
-					<i class="fa fa-angle-left" aria-hidden="true"></i>
-				</button>
-				<button class="MS-right">
-					<i class="fa fa-angle-right" aria-hidden="true"></i>
-				</button>
-			</div>
-		</div>
-	</div>
-	<hr>
 	<div class="row column">
 		<h4 style="margin: 0;" class="text-center">LATEST STORIES</h4>
 	</div>
@@ -302,7 +268,7 @@ i.fi-social-tumblr {
 	<div class="row">
 		<div class="large-8 columns" style="border-right: 1px solid #E3E5E8;">
 			<article>
-				<c:forEach var="list" items="${boarDto}">
+				<c:forEach var="list" items="${boardDto}">
 					<div class="row">
 						<div class="large-6 columns">
 							<p>
@@ -514,17 +480,16 @@ i.fi-social-tumblr {
     	let searchForm=$('#searchForm');
     	
     	$("#searchForm button").on('click',function(e){
-    		
-    		if(!searchForm.find('option:selected').val()){
-    			alter("검색종류를 선택하세요");
+    		e.preventDefault();
+    		if(!searchForm.find('option:selected').val()&&searchForm.find('option:selected').val()==""){
+    			alert("검색종류를 선택하세요");
     			return false;
     		}
-    		if(!searchForm.find("input[name='keyword']").val()){
-    			alter("키워들르 입력하세요.");
+    		if(!searchForm.find("input[name='keyword']").val()&&searchForm.find("input[name='keyword']").val()==""){
+    			alert("키워들르 입력하세요.");
     			return false;
     		}
     		searchForm.find("input[name='pageNum']").val("1");
-    		e.prevenDfault();
     		
     		searchForm.submit();
     	});

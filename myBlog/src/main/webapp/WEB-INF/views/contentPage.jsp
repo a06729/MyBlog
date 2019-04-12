@@ -97,7 +97,7 @@ i.fi-social-tumblr {
 									<input type="hidden" name="amount" value="${cri.amount}">
 									<input id="boardNum" name="boardNum" type="hidden" value='<c:out value="${boardDto.boardNum}"></c:out>'>
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-									<input type="submit" value="삭제">
+									<input type="submit" class="hollow button alert" value="삭제">
 								</div>
 							</form>
 						</c:if>

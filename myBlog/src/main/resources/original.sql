@@ -207,6 +207,12 @@ create table member(
     enabled char(1) default '1'
 );
 
+create table tbl_member_auth(
+	userid varchar(50) not null,
+    auth varchar(50) not null,
+    constraint fk_member_auth foreign key(userid) references tbl_member(userid)
+);
+
 create table uuidUrl(
 	userid varchar(50),
     uuid varchar(200),
@@ -234,7 +240,7 @@ create table board_file(
     ORIGINAL_FILE_NAME varchar(260),
     STORED_FILE_NAME varchar(200),
     FILE_SIZE int,
-    FILEPATH varchar(200),
+    FILEPATH varchar(1000),
     URL varchar(1000),
     constraint bn_fk foreign key (BOARDNUM) references board(BOARDNUM) ON DELETE CASCADE
 );

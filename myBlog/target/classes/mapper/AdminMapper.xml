@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pknu.blog.dao.AdminDao">
+	<select id="total" parameterType="criteria" resultType="int">
+		select count(BOARDNUM)
+		from board 
+		<include refid="search"></include>
+	</select>
+	
+	<select id="getList" parameterType="criteria" resultType="boardDto">
+		select BOARDNUM,BOARDTITLE,BOARDDATE,USERID,USERNAME,CATEGORY,VIEWCOUNT
+		from board
+		<include refid="search"></include>
+		order by BOARDNUM desc
+		limit #{pageStart},#{amount}
+	</select>
+	
+	<delete id="boardDelete" parameterType="int" >
+		delete
+		from board
+		where BOARDNUM=#{boardNum}
+	</delete>
+	
+	<sql id="search">
+		<trim prefix="where" prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<choose>
+					<when test="type=='T'.toString()">
+						OR BOARDTITLE LIKE concat('%',#{keyword},'%')
+					</when>
+					<when test="type=='C'.toString()">
+						OR BOARDCONTENT LIKE concat('%',#{keyword},'%')
+					</when>
+					
+					<when test="type=='W'.toString()">
+						OR USERNAME LIKE concat('%',#{keyword},'%')
+					</when>
+				</choose>
+			</foreach>
+		</trim>
+	</sql>
+</mapper>

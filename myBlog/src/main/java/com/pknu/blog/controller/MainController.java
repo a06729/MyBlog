@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.annotation.Resource;
-import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -55,9 +53,9 @@ public class MainController {
 		int total=mainService.getTotal();
 		List<BoardDto>boardList=mainService.getList(cri);
 		
-		System.out.println("total:"+total);
+		log.info("total:"+total);
 		
-		model.addAttribute("boarDto",boardList);
+		model.addAttribute("boardDto",boardList);
 		model.addAttribute("pageMaker",new PageDto(total, cri));
 		
 //		int searchCount=mainService.serchCount(cri);
@@ -220,7 +218,7 @@ public class MainController {
 		int searchCount=mainService.serchCount(cri);
 		List<BoardDto>boardList=mainService.serchList(cri);
 		
-		model.addAttribute("boarDto",boardList);
+		model.addAttribute("boardDto",boardList);
 		model.addAttribute("pageMaker",new PageDto(searchCount, cri));
 		return "searchPage";
 	}
