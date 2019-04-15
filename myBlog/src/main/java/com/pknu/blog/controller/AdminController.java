@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pknu.blog.dto.BoardDto;
 import com.pknu.blog.dto.Criteria;
+import com.pknu.blog.dto.MemberAuthDto;
+import com.pknu.blog.dto.MemberDto;
 import com.pknu.blog.dto.PageDto;
 import com.pknu.blog.service.AdminService;
 
@@ -38,7 +40,7 @@ public class AdminController {
 		model.addAttribute("boardDto",boardList);
 		model.addAttribute("pageMaker",new PageDto(total, cri));
 		
-		return "adminPage";
+		return "admin/adminPage";
 	}
 	@PostMapping("/boardDelete")
 	@ResponseBody
@@ -46,5 +48,33 @@ public class AdminController {
 		log.info("boardNum:"+boardNum);
 		adminService.boardDelete(boardNum);
 		return boardNum;
+	}
+	
+	@GetMapping("/IdListPage")
+	public String IdListPage(Criteria cri,Model model) {
+		int total=adminService.idTotal(cri);
+		List<MemberDto>idList=adminService.idList(cri);
+		
+		log.info("idList:"+idList);
+		
+		model.addAttribute("idList",idList);
+		model.addAttribute("pageMaker",new PageDto(total, cri));
+		
+		return "admin/IdListPage";
+	}
+	@PostMapping("/IdDelete")
+	@ResponseBody
+	public String IdDelete(@RequestParam("userId")String userId) {
+		adminService.IdDelete(userId);
+		return userId;
+	}
+	
+	@PostMapping("/AuthChange")
+	@ResponseBody
+	public MemberAuthDto AuthChange(MemberAuthDto authDto) {
+		log.info("MemberAuthDto:"+authDto);
+		adminService.AuthChange(authDto);
+		
+		return authDto;
 	}
 }

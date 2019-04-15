@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.pknu.blog.dao.AdminDao;
 import com.pknu.blog.dto.BoardDto;
 import com.pknu.blog.dto.Criteria;
+import com.pknu.blog.dto.MemberAuthDto;
+import com.pknu.blog.dto.MemberDto;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -30,6 +32,29 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.boardDelete(boardNum);
 		
 	}
+
+	@Override
+	public int idTotal(Criteria cri) {
+		return adminDao.idTotal(cri);
+	}
+
+	@Override
+	public List<MemberDto> idList(Criteria cri) {
+		return adminDao.idList(cri);
+	}
+
+	@Override
+	public void IdDelete(String userId) {
+		adminDao.IdDelete(userId);
+		
+	}
+
+	@Override
+	public void AuthChange(MemberAuthDto authDto) {
+		adminDao.AuthChange(authDto);
+		
+	}
+	
 	
 	
 	

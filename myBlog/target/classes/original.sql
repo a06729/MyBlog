@@ -207,16 +207,18 @@ create table member(
     enabled char(1) default '1'
 );
 
-create table tbl_member_auth(
+create table member_auth(
 	userid varchar(50) not null,
     auth varchar(50) not null,
-    constraint fk_member_auth foreign key(userid) references tbl_member(userid)
+    constraint fk_member_auth foreign key(userid) references member(userid) ON DELETE CASCADE
 );
+
+drop table uuidurl;
 
 create table uuidUrl(
 	userid varchar(50),
     uuid varchar(200),
-    constraint fk_member_uuid foreign key(userid) references member(userid)
+    constraint fk_member_uuid foreign key(userid) references member(userid) ON DELETE CASCADE
 );
 
 create table board(

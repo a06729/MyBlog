@@ -84,8 +84,9 @@ public class MainController {
 	
 	//회원가입 기능구현
 	@PostMapping("/sing")
-	public void sing(MemberDto memberDto,MemberAuthDto memberAuthDto){
+	public String sing(MemberDto memberDto,MemberAuthDto memberAuthDto){
 		mainService.memberSing(memberDto,memberAuthDto);
+		return "redirect:/";
 	}
 	
 	//게시판 글쓰기 페이지로 이동
