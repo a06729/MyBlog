@@ -9,6 +9,7 @@ public class Criteria {
  	
  	private String type;
  	private String keyword;
+ 	private String category;
  	
 	public Criteria() {
 		this(1,10);
@@ -60,10 +61,19 @@ public class Criteria {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 	@Override
 	public String toString() {
-		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", type=" + type + ", keyword=" + keyword + "]";
+		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", type=" + type + ", keyword=" + keyword
+				+ ", category=" + category + "]";
 	}
 
 	public String[] getTypeArr() {

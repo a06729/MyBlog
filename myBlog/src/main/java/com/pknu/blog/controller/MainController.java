@@ -185,6 +185,16 @@ public class MainController {
 		return "contentPage";
 	}
 	
+	//태그페이지
+	@GetMapping("/tagPage")
+	public void tagPage(Criteria cri,Model model){
+		int tagTotal=mainService.tagTotal(cri);
+		List<BoardDto>tagList=mainService.tagList(cri);
+		
+		model.addAttribute("boardDto",tagList);
+		model.addAttribute("pageMaker",new PageDto(tagTotal, cri));
+	}
+	
 	//글삭제 
 	@PostMapping("/boardDelete")
 	public String boardDelete(@RequestParam("boardNum")int boardNum,

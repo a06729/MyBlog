@@ -53,6 +53,10 @@ public interface MainService {
 
 	void passReset(String userPw, String username);
 
+	int tagTotal(Criteria cri);
+
+	List<BoardDto> tagList(Criteria cri);
+
 
 
 }

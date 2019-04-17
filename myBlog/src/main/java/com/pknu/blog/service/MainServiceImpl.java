@@ -278,6 +278,18 @@ public class MainServiceImpl implements MainService {
 		mainDao.passReset(map);
 		mainDao.deleteUUID(map);
 	}
+
+	@Override
+	public int tagTotal(Criteria cri) {
+		return mainDao.tagTotal(cri);
+	}
+
+	@Override
+	public List<BoardDto> tagList(Criteria cri) {
+		return mainDao.tagList(cri);
+	}
+	
+	
 	
 	
 

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>홈페이지</title>
+<title>태그페이지</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -78,7 +78,7 @@ i.fi-social-tumblr {
 	<jsp:include page="navbar.jsp"></jsp:include>
 	<br>
 	<div class="row column">
-		<h4 style="margin: 0;" class="text-center">검색어:<c:out value="${pageMaker.cri.keyword}"></c:out></h4>
+		<h4 style="margin: 0;" class="text-center">카테고리:<c:out value="${pageMaker.cri.category}"></c:out></h4>
 	</div>
 	<hr>
 	<div class="row">
@@ -148,11 +148,10 @@ i.fi-social-tumblr {
 					</c:if>
 				</ul>
 			</article>
-			<form id="actionForm" action="/search" method="get">
+			<form id="actionForm" action="/tagPage" method="get">
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-				<input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type}"></c:out>'>
-				<input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
+				<input type="hidden" name="category" value='<c:out value="${pageMaker.cri.category}"></c:out>'>
 			</form>
 		</div>
 		<jsp:include page="aside.jsp"></jsp:include>

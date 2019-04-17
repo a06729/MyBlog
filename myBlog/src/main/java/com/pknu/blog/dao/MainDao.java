@@ -57,5 +57,9 @@ public interface MainDao {
 
 	public void deleteUUID(Map<String, Object> map);
 
+	public int tagTotal(Criteria cri);
+
+	public List<BoardDto> tagList(Criteria cri);
+
 
 }

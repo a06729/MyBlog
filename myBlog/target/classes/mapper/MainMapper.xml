@@ -113,6 +113,20 @@
 		]]>
 
 	</select>
+	<select id="tagTotal" parameterType="criteria" resultType="int">
+		select count(*)
+		from board
+		where CATEGORY=#{category}
+	</select>
+	
+	<select id="tagList" parameterType="criteria" resultType="boardDto">
+		select b.BOARDNUM,b.BOARDTITLE,b.SIDETITLE,b.BOARDCONTENT,b.BOARDDATE,b.USERID,b.USERNAME,b.CATEGORY,b.VIEWCOUNT,bfile.url
+		from board b left outer join board_file bfile on b.boardnum=bfile.boardnum
+		where CATEGORY=#{category}
+		group by b.BOARDNUM
+		order by b.BOARDNUM desc
+		limit #{pageStart},#{amount}
+	</select>
 	
 	<update id="passReset" parameterType="map">
 		UPDATE member
