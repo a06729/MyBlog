@@ -20,7 +20,9 @@
 				<form method="post" action="/login">
 
 					<h1>login Page</h1>
-
+					<c:if test="${not empty errormsg}">
+						<p>${errormsg}</p>
+					</c:if>
 					<div class="input-group col-md-8 col-md-offset-2">
 						<input type="text" name="username" class="input email">
 						<label>이메일</label>

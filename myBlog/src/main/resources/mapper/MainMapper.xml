@@ -128,6 +128,26 @@
 		limit #{pageStart},#{amount}
 	</select>
 	
+	<select id="getOldFiles" resultType="boardFileDto">
+		<![CDATA[
+ 			select * 
+			from board_file 
+ 			where FILE_DATE<=date_add(now(), interval -1 day) 
+ 		]]>
+	</select>
+	
+	<select id="emailCheck" parameterType="String" resultType="int">
+		select count(*)
+		from member
+		where userid=#{userId}
+	</select>
+	
+	<select id="userNameCheck" parameterType="String" resultType="int">
+		select count(*)
+		from member
+		where username=#{userName}
+	</select>
+	
 	<update id="passReset" parameterType="map">
 		UPDATE member
 		set userpw=#{Encoder}

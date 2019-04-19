@@ -56,6 +56,22 @@ public class MainServiceImpl implements MainService {
 		mainDao.memberAuth(memberMap);
 	}
 	
+	
+	
+	@Override
+	public int emailCheck(String userId) {
+		return mainDao.emailCheck(userId);
+	}
+
+	
+
+	@Override
+	public int userNameCheck(String userName) {
+		return mainDao.userNameCheck(userName);
+	}
+
+
+
 	@Override
 	public BoardFileDto boardImage(BoardFileDto fileDto,MultipartHttpServletRequest mtfRequest) {
 		String path=mtfRequest.getSession().getServletContext().getRealPath(File.separator);

@@ -24,12 +24,12 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		});
 		
 		if(roleNames.contains("ROLE_ADMIN")) {
-			res.sendRedirect("/admin");
+			res.sendRedirect("/admin/boardList");
 			return ;
 		}
 		
 		if(roleNames.contains("ROLE_MEMBER")) {
-			res.sendRedirect("/member");
+			res.sendRedirect("/");
 			return;
 		}
 		

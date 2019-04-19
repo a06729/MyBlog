@@ -82,6 +82,19 @@ public class MainController {
 		return "singupPage";
 	}
 	
+	//이메일 중복체크
+	@PostMapping("/emailCheck")
+	@ResponseBody
+	public int emailCheck(@RequestParam("userId")String userId) {
+		return mainService.emailCheck(userId);
+	}
+	
+	@PostMapping("/userNameCheck")
+	@ResponseBody
+	public int userNameCheck(@RequestParam("userName")String userName) {
+		return mainService.userNameCheck(userName);
+	}
+	
 	//회원가입 기능구현
 	@PostMapping("/sing")
 	public String sing(MemberDto memberDto,MemberAuthDto memberAuthDto){

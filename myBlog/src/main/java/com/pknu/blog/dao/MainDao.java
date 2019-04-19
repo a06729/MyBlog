@@ -60,6 +60,11 @@ public interface MainDao {
 	public int tagTotal(Criteria cri);
 
 	public List<BoardDto> tagList(Criteria cri);
+	
+	public List<BoardFileDto> getOldFiles();
 
+	public int emailCheck(String userId);
+
+	public int userNameCheck(String userName);
 
 }

@@ -47,35 +47,36 @@ i.fi-social-tumblr {
 }
 </style>
 <body>
-	<header>
-		<div class="title-bar" data-responsive-toggle="example-menu"
-			data-hide-for="medium">
-			<button class="menu-icon" type="button" data-toggle="example-menu"></button>
-			<div class="title-bar-title">Menu</div>
-		</div>
+<!-- 	<header> -->
+<!-- 		<div class="title-bar" data-responsive-toggle="example-menu" -->
+<!-- 			data-hide-for="medium"> -->
+<!-- 			<button class="menu-icon" type="button" data-toggle="example-menu"></button> -->
+<!-- 			<div class="title-bar-title">Menu</div> -->
+<!-- 		</div> -->
 
-		<div class="top-bar" id="example-menu">
-			<div class="top-bar-left">
-				<ul class="dropdown menu" data-dropdown-menu>
-					<li class="menu-text">이슈사이트</li>
-					<li class="has-submenu"><a href="#0">One</a>
-						<ul class="submenu menu vertical" data-submenu>
-							<li><a href="#0">One</a></li>
-							<li><a href="#0">Two</a></li>
-							<li><a href="#0">Three</a></li>
-						</ul></li>
-					<li><a href="#0">Two</a></li>
-					<li><a href="#0">Three</a></li>
-				</ul>
-			</div>
-			<div class="top-bar-right">
-				<ul class="menu">
-					<li><input type="search" placeholder="Search"></li>
-					<li><button type="button" class="button">Search</button></li>
-				</ul>
-			</div>
-		</div>
-	</header>
+<!-- 		<div class="top-bar" id="example-menu"> -->
+<!-- 			<div class="top-bar-left"> -->
+<!-- 				<ul class="dropdown menu" data-dropdown-menu> -->
+<!-- 					<li class="menu-text">이슈사이트</li> -->
+<!-- 					<li class="has-submenu"><a href="#0">One</a> -->
+<!-- 						<ul class="submenu menu vertical" data-submenu> -->
+<!-- 							<li><a href="#0">One</a></li> -->
+<!-- 							<li><a href="#0">Two</a></li> -->
+<!-- 							<li><a href="#0">Three</a></li> -->
+<!-- 						</ul></li> -->
+<!-- 					<li><a href="#0">Two</a></li> -->
+<!-- 					<li><a href="#0">Three</a></li> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 			<div class="top-bar-right"> -->
+<!-- 				<ul class="menu"> -->
+<!-- 					<li><input type="search" placeholder="Search"></li> -->
+<!-- 					<li><button type="button" class="button">Search</button></li> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</header> -->
+	<jsp:include page="navbar.jsp"></jsp:include>
 	<hr>
 	<div class="row column">
 		<h4 style="margin: 0;" class="text-center">${boardDto.boardTitle}</h4>
@@ -107,7 +108,7 @@ i.fi-social-tumblr {
 									<input type="hidden" name="pageNum" value="${cri.pageNum}">
 									<input type="hidden" name="amount" value="${cri.amount}">
 									<input id="boardNum" name="boardNum" type="hidden" value='<c:out value="${boardDto.boardNum}"></c:out>'>
-									<input type="submit" value="수정">
+									<input class="hollow button warning" type="submit" value="수정">
 								</div>
 							</form>
 						</c:if>
@@ -115,7 +116,7 @@ i.fi-social-tumblr {
 							<div class="column small-4">
 								<input type="hidden" name="pageNum" value="${cri.pageNum}">
 								<input type="hidden" name="amount" value="${cri.amount}">
-								<input type="submit" value="목록">
+								<input class="hollow button success" type="submit" value="목록">
 							</div>
 						</form>
 					</div>
@@ -145,118 +146,120 @@ i.fi-social-tumblr {
 <%-- 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}"> --%>
 <!-- 			</form> -->
 		</div>
-		<div class="large-4 columns">
-			<aside>
-				<div class="row small-up-3">
-					<div class="column text-center">
-						<i class="fi-social-facebook"></i>
-						<h6>56,009</h6>
-						<p>
-							<small>FOLLOWERS</small>
-						</p>
-						<br>
-					</div>
-					<div class="column text-center">
-						<i class="fi-social-twitter"></i>
-						<h6>76,905</h6>
-						<p>
-							<small>FOLLOWERS</small>
-						</p>
-						<br>
-					</div>
-					<div class="column text-center">
-						<i class="fi-social-instagram"></i>
-						<h6>34,099</h6>
-						<p>
-							<small>FOLLOWERS</small>
-						</p>
-						<br>
-					</div>
-					<div class="column text-center">
-						<i class="fi-social-tumblr"></i>
-						<h6>13,765</h6>
-						<p>
-							<small>FOLLOWERS</small>
-						</p>
-					</div>
-					<div class="column text-center">
-						<i class="fi-social-pinterest"></i>
-						<h6>9,283</h6>
-						<p>
-							<small>FOLLOWERS</small>
-						</p>
-					</div>
-					<div class="column text-center">
-						<i class="fi-social-youtube"></i>
-						<h6>99,000</h6>
-						<p>
-							<small>FOLLOWERS</small>
-						</p>
-					</div>
-				</div>
-				<br>
-				<div class="row column">
-					<p class="lead">FROM OUR FRIENDS</p>
-					<p>
-						<img src="https://placehold.it/400x300&text=Buy Me!"
-							alt="advertisement of ShamWow">
-					</p>
-				</div>
-				<br>
-				<div class="row column">
-					<p class="lead">TRENDING POSTS</p>
-					<div class="media-object">
-						<div class="media-object-section">
-							<img class="thumbnail" src="https://placehold.it/100">
-						</div>
-						<div class="media-object-section">
-							<h5>All I need is a space suit and I'm ready to go.</h5>
-						</div>
-					</div>
-					<div class="media-object">
-						<div class="media-object-section">
-							<img class="thumbnail" src="https://placehold.it/100">
-						</div>
-						<div class="media-object-section">
-							<h5>Are the stars out tonight? I don't know if it's cloudy
-								or bright.</h5>
-						</div>
-					</div>
-					<div class="media-object">
-						<div class="media-object-section">
-							<img class="thumbnail" src="https://placehold.it/100">
-						</div>
-						<div class="media-object-section">
-							<h5>And the world keeps spinning.</h5>
-						</div>
-					</div>
-					<div class="media-object">
-						<div class="media-object-section">
-							<img class="thumbnail" src="https://placehold.it/100">
-						</div>
-						<div class="media-object-section">
-							<h5>Cold hearted orb that rules the night.</h5>
-						</div>
-					</div>
-				</div>
-			</aside>
-			<input type="hidden" name="boardNum" id="boardNum" value="${boardDto.boardNum}">
-		</div>
+<!-- 		<div class="large-4 columns"> -->
+<!-- 			<aside> -->
+<!-- 				<div class="row small-up-3"> -->
+<!-- 					<div class="column text-center"> -->
+<!-- 						<i class="fi-social-facebook"></i> -->
+<!-- 						<h6>56,009</h6> -->
+<!-- 						<p> -->
+<!-- 							<small>FOLLOWERS</small> -->
+<!-- 						</p> -->
+<!-- 						<br> -->
+<!-- 					</div> -->
+<!-- 					<div class="column text-center"> -->
+<!-- 						<i class="fi-social-twitter"></i> -->
+<!-- 						<h6>76,905</h6> -->
+<!-- 						<p> -->
+<!-- 							<small>FOLLOWERS</small> -->
+<!-- 						</p> -->
+<!-- 						<br> -->
+<!-- 					</div> -->
+<!-- 					<div class="column text-center"> -->
+<!-- 						<i class="fi-social-instagram"></i> -->
+<!-- 						<h6>34,099</h6> -->
+<!-- 						<p> -->
+<!-- 							<small>FOLLOWERS</small> -->
+<!-- 						</p> -->
+<!-- 						<br> -->
+<!-- 					</div> -->
+<!-- 					<div class="column text-center"> -->
+<!-- 						<i class="fi-social-tumblr"></i> -->
+<!-- 						<h6>13,765</h6> -->
+<!-- 						<p> -->
+<!-- 							<small>FOLLOWERS</small> -->
+<!-- 						</p> -->
+<!-- 					</div> -->
+<!-- 					<div class="column text-center"> -->
+<!-- 						<i class="fi-social-pinterest"></i> -->
+<!-- 						<h6>9,283</h6> -->
+<!-- 						<p> -->
+<!-- 							<small>FOLLOWERS</small> -->
+<!-- 						</p> -->
+<!-- 					</div> -->
+<!-- 					<div class="column text-center"> -->
+<!-- 						<i class="fi-social-youtube"></i> -->
+<!-- 						<h6>99,000</h6> -->
+<!-- 						<p> -->
+<!-- 							<small>FOLLOWERS</small> -->
+<!-- 						</p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<br> -->
+<!-- 				<div class="row column"> -->
+<!-- 					<p class="lead">FROM OUR FRIENDS</p> -->
+<!-- 					<p> -->
+<!-- 						<img src="https://placehold.it/400x300&text=Buy Me!" -->
+<!-- 							alt="advertisement of ShamWow"> -->
+<!-- 					</p> -->
+<!-- 				</div> -->
+<!-- 				<br> -->
+<!-- 				<div class="row column"> -->
+<!-- 					<p class="lead">TRENDING POSTS</p> -->
+<!-- 					<div class="media-object"> -->
+<!-- 						<div class="media-object-section"> -->
+<!-- 							<img class="thumbnail" src="https://placehold.it/100"> -->
+<!-- 						</div> -->
+<!-- 						<div class="media-object-section"> -->
+<!-- 							<h5>All I need is a space suit and I'm ready to go.</h5> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="media-object"> -->
+<!-- 						<div class="media-object-section"> -->
+<!-- 							<img class="thumbnail" src="https://placehold.it/100"> -->
+<!-- 						</div> -->
+<!-- 						<div class="media-object-section"> -->
+<!-- 							<h5>Are the stars out tonight? I don't know if it's cloudy -->
+<!-- 								or bright.</h5> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="media-object"> -->
+<!-- 						<div class="media-object-section"> -->
+<!-- 							<img class="thumbnail" src="https://placehold.it/100"> -->
+<!-- 						</div> -->
+<!-- 						<div class="media-object-section"> -->
+<!-- 							<h5>And the world keeps spinning.</h5> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="media-object"> -->
+<!-- 						<div class="media-object-section"> -->
+<!-- 							<img class="thumbnail" src="https://placehold.it/100"> -->
+<!-- 						</div> -->
+<!-- 						<div class="media-object-section"> -->
+<!-- 							<h5>Cold hearted orb that rules the night.</h5> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</aside> -->
+<!-- 		</div> -->
+		<jsp:include page="aside.jsp"></jsp:include>
+		<input type="hidden" name="boardNum" id="boardNum" value="${boardDto.boardNum}">
 		<div class="large-12 columns">
 			<article>
 				<div id="disqus_thread"></div>
 			</article>
 		</div>
 	</div>
-	<footer>
-		<div class="row expanded callout secondary">
-			<div class="medium-12 columns">
-				<ul class="menu align-right">
-					<li class="menu-text">Copyright © 2019</li>
-				</ul>
-			</div>
-		</div>
-	</footer>
+	<jsp:include page="footer.jsp"></jsp:include>
+<!-- 	<footer> -->
+<!-- 		<div class="row expanded callout secondary"> -->
+<!-- 			<div class="medium-12 columns"> -->
+<!-- 				<ul class="menu align-right"> -->
+<!-- 					<li class="menu-text">Copyright © 2019</li> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</footer> -->
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

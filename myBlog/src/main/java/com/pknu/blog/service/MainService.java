@@ -57,6 +57,10 @@ public interface MainService {
 
 	List<BoardDto> tagList(Criteria cri);
 
+	int emailCheck(String userId);
+
+	int userNameCheck(String userName);
+
 
 
 }

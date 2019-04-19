@@ -59,36 +59,37 @@
     </style>
 
     <body>
-  <header>
-    <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
-      <button class="menu-icon" type="button" data-toggle="example-menu"></button>
-      <div class="title-bar-title">Menu</div>
-    </div>
+<!--   <header> -->
+<!--     <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium"> -->
+<!--       <button class="menu-icon" type="button" data-toggle="example-menu"></button> -->
+<!--       <div class="title-bar-title">Menu</div> -->
+<!--     </div> -->
 
-    <div class="top-bar" id="example-menu">
-      <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
-          <li class="menu-text">Site Title</li>
-          <li class="has-submenu">
-            <a href="#0">One</a>
-            <ul class="submenu menu vertical" data-submenu>
-              <li><a href="#0">One</a></li>
-              <li><a href="#0">Two</a></li>
-              <li><a href="#0">Three</a></li>
-            </ul>
-          </li>
-          <li><a href="#0">Two</a></li>
-          <li><a href="#0">Three</a></li>
-        </ul>
-      </div>
-      <div class="top-bar-right">
-        <ul class="menu">
-          <li><input type="search" placeholder="Search"></li>
-          <li><button type="button" class="button">Search</button></li>
-        </ul>
-      </div>
-    </div>
-  </header>
+<!--     <div class="top-bar" id="example-menu"> -->
+<!--       <div class="top-bar-left"> -->
+<!--         <ul class="dropdown menu" data-dropdown-menu> -->
+<!--           <li class="menu-text">Site Title</li> -->
+<!--           <li class="has-submenu"> -->
+<!--             <a href="#0">One</a> -->
+<!--             <ul class="submenu menu vertical" data-submenu> -->
+<!--               <li><a href="#0">One</a></li> -->
+<!--               <li><a href="#0">Two</a></li> -->
+<!--               <li><a href="#0">Three</a></li> -->
+<!--             </ul> -->
+<!--           </li> -->
+<!--           <li><a href="#0">Two</a></li> -->
+<!--           <li><a href="#0">Three</a></li> -->
+<!--         </ul> -->
+<!--       </div> -->
+<!--       <div class="top-bar-right"> -->
+<!--         <ul class="menu"> -->
+<!--           <li><input type="search" placeholder="Search"></li> -->
+<!--           <li><button type="button" class="button">Search</button></li> -->
+<!--         </ul> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </header> -->
+	<jsp:include page="navbar.jsp"></jsp:include>
         <form id="boardFrom" name="boardFrom" action="/boardWrite" method="post" role="form"> 
 			<div class="wrapper">
 				<div class="contentArea">
@@ -98,11 +99,9 @@
 						<select
 							name="category" class="select-css"
 							style="margin-top: 10px; margin-bottom: 10px;">
-							<option>This is a native select element</option>
-							<option>Apples</option>
-							<option>Bananas</option>
-							<option>Grapes</option>
-							<option>Oranges</option>
+							<option>정치/사회</option>
+							<option>경제</option>
+							<option>페미니즘</option>
 						</select>
 					</div>
 					<div class="editorArea">
@@ -121,15 +120,16 @@
 	<div id="uploadResult">
 	
 	</div>
-        <footer>
-			<div class="row expanded callout secondary">
-				<div class="medium-12 columns">
-					<ul class="menu align-right">
-						<li class="menu-text">Copyright © 2019</li>
-					</ul>
-				</div>
-			</div>
-		</footer>
+	<jsp:include page="footer.jsp"></jsp:include>
+<!--         <footer> -->
+<!-- 			<div class="row expanded callout secondary"> -->
+<!-- 				<div class="medium-12 columns"> -->
+<!-- 					<ul class="menu align-right"> -->
+<!-- 						<li class="menu-text">Copyright © 2019</li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</footer> -->
 <!-- 	   	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
 <!--         <script src="/js/jquery-3.3.1.min.js"></script>  -->
 		<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
