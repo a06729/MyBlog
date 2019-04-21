@@ -3,49 +3,19 @@
 	<aside>
 		<div class="row small-up-3">
 			<div class="column text-center">
-				<i class="fi-social-facebook"></i>
-				<h6>56,009</h6>
-				<p>
-					<small>FOLLOWERS</small>
-				</p>
+				<!-- Share on Twitter -->
+				<a href="#" onclick="javascript:window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20'
+				+encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog',
+				 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Twitter">
+				 <img src="./image/Twitter.png"></a>
+				 <br>
+			</div>
+			<div class="column text-center">
+				<a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u='
+				+encodeURIComponent(document.URL)+'&amp;t='+encodeURIComponent(document.title), 'facebooksharedialog',
+				 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook">
+				<img src="./image/Facebook.png"></a>
 				<br>
-			</div>
-			<div class="column text-center">
-				<i class="fi-social-twitter"></i>
-				<h6>76,905</h6>
-				<p>
-					<small>FOLLOWERS</small>
-				</p>
-				<br>
-			</div>
-			<div class="column text-center">
-				<i class="fi-social-instagram"></i>
-				<h6>34,099</h6>
-				<p>
-					<small>FOLLOWERS</small>
-				</p>
-				<br>
-			</div>
-			<div class="column text-center">
-				<i class="fi-social-tumblr"></i>
-				<h6>13,765</h6>
-				<p>
-					<small>FOLLOWERS</small>
-				</p>
-			</div>
-			<div class="column text-center">
-				<i class="fi-social-pinterest"></i>
-				<h6>9,283</h6>
-				<p>
-					<small>FOLLOWERS</small>
-				</p>
-			</div>
-			<div class="column text-center">
-				<i class="fi-social-youtube"></i>
-				<h6>99,000</h6>
-				<p>
-					<small>FOLLOWERS</small>
-				</p>
 			</div>
 		</div>
 		<br>

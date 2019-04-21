@@ -253,17 +253,10 @@ public class MainController {
 	}
 	
 	//로그인페이지로 이동
-	@GetMapping("loginPage")
-	public void loginPage(String error,String logout,Model model) {
-		if(error != null) {
-			System.out.println(error);
-			model.addAttribute("error","Login Error Check Your Account");
-		}
-		
-		if(logout !=null) {
-			System.out.println(logout);
-			model.addAttribute("logout","Logout!!");
-		}
+	//로그인 페이지는 @GetMapping으로 하면 로그인성공할때는 문제없지만 로그인 실패시 /login으로 이동하고 405 Post로 요청보내지 않는다고
+	//에러가 발생하는데 이유는 모르겠다.
+	@RequestMapping(value="/loginPage")
+	public void loginPage() {
 		
 	}
 	

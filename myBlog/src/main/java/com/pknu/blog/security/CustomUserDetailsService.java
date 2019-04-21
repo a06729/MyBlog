@@ -1,5 +1,7 @@
 package com.pknu.blog.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,18 +16,24 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
 	private MainDao mainDao;
 	
-	@Autowired
-	private PasswordEncoder encoder;
+	public static final Logger log=LoggerFactory.getLogger(CustomUserDetailsService.class);
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		MemberDto dto;
-		System.out.println("Load User By UserName:"+username);
+		
+		log.info("Load User By UserName:"+username);
 		
 		dto=mainDao.read(username);
 		
-		System.out.println("queried by member mapper:"+dto);
+		log.info("queried by member mapper:"+dto);
 		
-		return dto==null ? null:new CustomUser(dto);
+		if(dto==null) {
+			throw new UsernameNotFoundException(username);
+		}
+		
+		return dto;
+		
 	}
 	
 }

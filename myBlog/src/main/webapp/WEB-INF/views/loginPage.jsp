@@ -20,16 +20,20 @@
 				<form method="post" action="/login">
 
 					<h1>login Page</h1>
-					<c:if test="${not empty errormsg}">
-						<p>${errormsg}</p>
-					</c:if>
+				   
+				   <c:if test="${not empty ERRORMSG}">
+				       <font color="red">
+				       <p style="text-align: center;">${ERRORMSG}</p>
+				       </font>
+				   </c:if>
+
 					<div class="input-group col-md-8 col-md-offset-2">
-						<input type="text" name="username" class="input email">
+						<input type="text" name="username" class="input email" value="${username}">
 						<label>이메일</label>
 					</div>
 				
 					<div class="input-group col-md-8 col-md-offset-2">
-						<input type="password" name="password" class="input password">
+						<input type="password" name="password" class="input password" value="${password}">
 						<label>비밀번호</label>
 					</div>
 			

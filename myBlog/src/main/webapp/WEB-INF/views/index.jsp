@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>홈페이지</title>
+<title>이슈저장소</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+<link rel="shortcut icon" type="image/x-icon" href="./image/logoIco.png" >
 </head>
 <style>
 /*icon styles*/

@@ -8,7 +8,7 @@
 		<result property="userId" column="userid"/>
 		<result property="userPw" column="userpw"/>
 		<result property="userName" column="username"/>
-		<result property="enabled" column="enabled"/>
+		<result property="ban" column="ban"/>
 		<result property="regdate" column="regdate"/>
 		<result property="updateDate" column="updatedate"/>
 		<collection property="authList" resultMap="authMap"></collection>
@@ -30,7 +30,7 @@
 	</resultMap>
 	
 	<select id="read" resultMap="memberMap">
-		select mem.userid,userpw,username,enabled,regdate,updatedate,auth
+		select mem.userid,userpw,username,ban,regdate,updatedate,auth
 		from member mem LEFT OUTER JOIN member_auth auth on mem.userid=auth.userid
 		where mem.userid=#{userId}
 	</select>
