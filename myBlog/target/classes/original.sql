@@ -205,7 +205,7 @@ create table member(
     username varchar(100) not null,
     regdate datetime default now(),
     updatedate datetime default now(),
-    ban char(1) default '1'
+    ban boolean default true
 );
 
 create table member_auth(
@@ -245,6 +245,7 @@ create table board_file(
     FILE_SIZE int,
     FILEPATH varchar(1000),
     URL varchar(1000),
+    FILE_DATE datetime default now(),
     constraint bn_fk foreign key (BOARDNUM) references board(BOARDNUM) ON DELETE CASCADE
 );
 
