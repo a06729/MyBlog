@@ -61,6 +61,10 @@ public interface MainService {
 
 	int userNameCheck(String userName);
 
+	MemberDto getUserInfo(String userId);
+
+	int changePass(String nowPass, String newPass, String userId);
+
 
 
 }

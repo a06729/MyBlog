@@ -30,6 +30,11 @@
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li>
+						<form action="/userInfo" method="get">
+							<input class="hollow button" type="submit" value="회원정보 ">
+						</form>
+					</li>
+					<li>
 						<form action="/logout" method="post">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }">
 							<input class="hollow button alert" type="submit" value="로그아웃">

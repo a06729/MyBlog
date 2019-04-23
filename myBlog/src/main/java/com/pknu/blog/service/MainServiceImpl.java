@@ -4,27 +4,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.Principal;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
-import com.google.gson.JsonObject;
+
 import com.pknu.blog.dao.MainDao;
 import com.pknu.blog.dto.BoardDto;
 import com.pknu.blog.dto.BoardFileDto;
@@ -34,7 +30,7 @@ import com.pknu.blog.dto.MemberDto;
 
 @Service
 public class MainServiceImpl implements MainService {
-
+	public static final Logger log=LoggerFactory.getLogger(MainServiceImpl.class);
 	@Autowired
 	private MainDao mainDao;
 	
@@ -103,37 +99,6 @@ public class MainServiceImpl implements MainService {
 			fileDto.setStored_File_Name(storedFileName);
 			fileDto.setFile_Size(fileSize);
 		}
-		
-//		String originFileName =upload.getOriginalFilename();
-//		String storedFileName=uuid+upload.getOriginalFilename();
-//		long fileSize=upload.getSize();
-		
-//		String savePath=path+File.separator+"resources"+File.separator+"boardImages"+File.separator+storedFileName;
-//		String url=File.separator+"boardImages"+File.separator+storedFileName;
-		
-//		System.out.println(savePath);
-		
-//		File dir=new File(savePath);
-		
-//		if(!dir.exists()) {
-//			dir.mkdirs();
-//		}
-//		try {
-//		// mtFile.transferTo(new File(savePath); 이렇게도 가능
-//			upload.transferTo(dir);
-//			fileDto.setUploaded(1);
-//			fileDto.setUrl(url);
-//			fileDto.setFilePate(savePath);
-//			fileDto.setOriginal_File_Name(originFileName);
-//			fileDto.setStored_File_Name(storedFileName);
-//			fileDto.setFile_Size(fileSize);
-//			
-//		}catch (IllegalStateException e) {
-//			e.printStackTrace();
-//		}catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		
 		
 		return fileDto;
 	}
@@ -304,6 +269,38 @@ public class MainServiceImpl implements MainService {
 	public List<BoardDto> tagList(Criteria cri) {
 		return mainDao.tagList(cri);
 	}
+
+
+
+	@Override
+	public MemberDto getUserInfo(String userId) {
+		return mainDao.getUserInfo(userId);
+	}
+
+
+
+	@Override
+	public int changePass(String nowPass, String newPass,String userId) {
+		Map<String,String>map=new HashMap<>();
+		
+		String newEncode=passwordEncoder.encode(newPass);
+		map.put("userId", userId);
+		map.put("newPass",newEncode);
+		
+		MemberDto checkPass=mainDao.checkPass(map);
+		
+		log.info("checkPass"+checkPass);
+		
+		if(passwordEncoder.matches(nowPass, checkPass.getUserPw())) {
+			log.info("비밀번호 일치함 비밀번호 변경 실행");
+			mainDao.changePass(map);
+			return 1;//1은 참
+		}else {
+			return 0;//0은 거짓
+		}
+	}
+	
+	
 	
 	
 	

@@ -22,6 +22,8 @@
 	<security:http>
 		<security:intercept-url pattern="/" access="permitAll"/>
 		<security:intercept-url pattern="/boardWrite" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/userInfo" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/changePass" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/boardPage" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/member" access="hasRole('ROLE_MEMBER')"/>
 		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
@@ -32,7 +34,7 @@
 							 default-target-url="/"
 							 authentication-success-handler-ref="customLoginSuccessHandler"
 							 authentication-failure-handler-ref="customLoginFailureHandler"/>
-		<security:logout logout-url="/logout" invalidate-session="true"/>
+		<security:logout logout-url="/logout" logout-success-url="/" invalidate-session="true"/>
 		<security:access-denied-handler ref="customAccessDenied"/>
 	</security:http>
 	

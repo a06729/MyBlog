@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>홈페이지</title>
+<title>이슈사이트 - <c:out value="${pageMaker.cri.keyword}"></c:out></title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/bootstrap.min.css">

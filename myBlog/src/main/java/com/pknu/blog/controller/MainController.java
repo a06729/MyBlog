@@ -259,6 +259,27 @@ public class MainController {
 	public void loginPage() {
 		
 	}
+	//유저 회원정보 페이지
+	@RequestMapping(value="/userInfo")
+	public String userInfo(Principal principal,Model model) {
+		log.info("로그인 아이디:"+principal.getName());
+		String userId=principal.getName();
+		MemberDto memberDto=mainService.getUserInfo(userId);
+		model.addAttribute("memberDto",memberDto);
+		return "userInfo";
+	}
+	
+	@RequestMapping(value="/changePass",method=RequestMethod.POST)
+	@ResponseBody
+	public int changePass(@RequestParam("nowPass")String nowPass,
+						  @RequestParam("newPass")String newPass,
+						  Principal principal) {
+		String userId=principal.getName();
+		log.info("nowPass:"+nowPass);
+		log.info("newPass:"+newPass);
+		log.info("userId:"+userId);
+		return mainService.changePass(nowPass,newPass,userId);
+	}
 	
 	//비밀번호 찾기 페이지로 이동
 	@GetMapping("/passFindPage")
@@ -323,7 +344,7 @@ public class MainController {
 	
 	@RequestMapping(value="/logout",method={RequestMethod.GET,RequestMethod.POST})
 	public void logout() {
-		System.out.println("로그아웃 진입");
+		log.info("로그아웃 진입");
 	}
 	
 }

@@ -67,4 +67,11 @@ public interface MainDao {
 
 	public int userNameCheck(String userName);
 
+	public MemberDto getUserInfo(String userId);
+
+	public MemberDto checkPass(Map<String, String> map);
+
+	public void changePass(Map<String, String> map);
+
+
 }
