@@ -215,7 +215,7 @@ public class MainController {
 		mainService.boardDelete(boardNum);
 		
 		rttr.addAttribute("pageNum",cri.getPageNum());
-		rttr.addAttribute("pageNum",cri.getAmount());
+		rttr.addAttribute("amount",cri.getAmount());
 		return "redirect:/";
 	}
 	
@@ -237,7 +237,7 @@ public class MainController {
 		mainService.boardModify(boardDto,principal);
 		
 		rttr.addAttribute("pageNum",cri.getPageNum());
-		rttr.addAttribute("pageNum",cri.getAmount());
+		rttr.addAttribute("amount",cri.getAmount());
 		return "redirect:/";
 	}
 	
