@@ -5,11 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>로그인 페이지</title>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:100,300,400'>
 <link rel="stylesheet" href="css/customCss/loginPage.css">
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" type="image/x-icon" href="./image/logoIco.png" >
 </head>
 <body>
  <div class="container">

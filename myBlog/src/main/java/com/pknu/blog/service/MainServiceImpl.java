@@ -78,7 +78,11 @@ public class MainServiceImpl implements MainService {
 			String originFileName =mf.getOriginalFilename();
 			String storedFileName=uuid+"_"+mf.getOriginalFilename();
 			long fileSize=mf.getSize();
-			String savePath=path+File.separator+"resources"+File.separator+"boardImages"+File.separator+storedFileName;
+		
+		//  윈도우용
+		//  String savePath=path+File.separator+"resources"+File.separator+"boardImages"+File.separator+storedFileName;
+			
+			String savePath=path+"resources"+File.separator+"boardImages"+File.separator+storedFileName;
 			String urlPath=File.separator+"boardImages"+File.separator+storedFileName;			
 			File dir=new File(savePath);
 			if(!dir.exists()) {

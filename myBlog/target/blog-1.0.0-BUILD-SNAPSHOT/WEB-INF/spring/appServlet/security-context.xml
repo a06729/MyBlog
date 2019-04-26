@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+
+	
+	<bean id="customAccessDenied" class="com.pknu.blog.security.CustomAccessDeniedHandler"></bean>
+	<bean id="customLoginSuccessHandler" class="com.pknu.blog.security.CustomLoginSuccessHandler"></bean>
+	<bean id="BCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	<bean id="customUserDetailsService" class="com.pknu.blog.security.CustomUserDetailsService"></bean>
+	<bean id="customAuthenticationProvider" class="com.pknu.blog.security.CustomAuthenticationProvider"></bean>
+	
+	<security:http>
+		<security:intercept-url pattern="/" access="permitAll"/>
+		<security:intercept-url pattern="/boardWrite" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/userInfo" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/changePass" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/boardPage" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/member" access="hasRole('ROLE_MEMBER')"/>
+		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+		<security:form-login username-parameter="username"
+							 password-parameter="password"
+							 login-processing-url="/login" 
+							 login-page="/loginPage"
+							 default-target-url="/"
+							 authentication-success-handler-ref="customLoginSuccessHandler"
+							 authentication-failure-handler-ref="customLoginFailureHandler"/>
+		<security:logout logout-url="/logout" logout-success-url="/" invalidate-session="true"/>
+		<security:access-denied-handler ref="customAccessDenied"/>
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider ref="customAuthenticationProvider"></security:authentication-provider>
+		<security:authentication-provider user-service-ref="customUserDetailsService">
+		<security:password-encoder ref="BCryptPasswordEncoder"></security:password-encoder>
+<!-- 			<security:user-service> -->
+<!-- 				<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/> -->
+<!-- 				<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER,ROLE_ADMIN" /> -->
+<!-- 			</security:user-service> -->
+<!-- 				<security:jdbc-user-service data-source-ref="dataSource" -->
+<!-- 					users-by-username-query="select userid,userpw,enabled  -->
+<!-- 					                         from member  -->
+<!-- 					                         where userid=?" -->
+<!-- 					authorities-by-username-query="select userid,auth  -->
+<!-- 					                               from member_auth -->
+<!-- 					                               where userid=?" -->
+<!-- 				/> -->
+		</security:authentication-provider>
+	
+	</security:authentication-manager>
+	
+	<bean id="customLoginFailureHandler" class="com.pknu.blog.security.CustomLoginFailureHandler">
+ 		<property name="loginIdName" value="username"></property>
+ 		<property name="loginPwdName" value="password"></property>
+ 		<property name="errorMsgName" value="ERRORMSG"></property>
+ 		<property name="defaultFailureUrl" value="/loginPage?error"></property>
+ 	</bean>
+	
+</beans>

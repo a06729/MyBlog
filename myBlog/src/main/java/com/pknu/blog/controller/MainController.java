@@ -232,8 +232,13 @@ public class MainController {
 	
 	//글수정
 	@PostMapping("/boardModify")
-	public void boardModify(BoardDto boardDto,Principal principal) {
+	public String boardModify(BoardDto boardDto,Principal principal,
+			                  @ModelAttribute("cri")Criteria cri,RedirectAttributes rttr) {
 		mainService.boardModify(boardDto,principal);
+		
+		rttr.addAttribute("pageNum",cri.getPageNum());
+		rttr.addAttribute("pageNum",cri.getAmount());
+		return "redirect:/";
 	}
 	
 	//검색결과
@@ -298,7 +303,7 @@ public class MainController {
 			log.info("아이디가 존재함");
 			UUID uuid=UUID.randomUUID();
 			mainService.uuidInsert(username,uuid);
-			String setFrom="a06729@gmail.com";
+			String setFrom="MongRaGong@gmail.com";
 			String tomail=username;
 			String title="비밀번호 변경 링크";
 			String content=new StringBuffer().append("<a href='http://localhost:8080/passResetPage?uuid=").append(uuid).append("&username=").append(username).append("'target='_blenk''>비밀번호 초기화링크</a>").toString();
