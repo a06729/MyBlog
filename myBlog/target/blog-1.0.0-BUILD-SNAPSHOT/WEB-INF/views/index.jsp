@@ -7,12 +7,24 @@
 <title>이슈저장소</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="ALL">
+<meta name = keywords" content="이슈저장소,페미니즘,대깨문,더불어민주당,더불어페미당,자유한국당">
+<meta name ="description" content="대깨문,더불어민주당,더불어페미당,깨시민,페미니즘,정치/사회,자유한국당">
+<meta name ="author" content="이슈저장소"> 
+<meta name="google-site-verification" content="4-7_fKx76dcD-09r1nSx22mJ0K32eTrVNED-10Tf8HA" />
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
 <link rel="shortcut icon" type="image/x-icon" href="./image/logoIco.png" >
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+	(adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-5504977758442742",
+		enable_page_level_ads: true
+	});
+</script>
 </head>
 <style>
 /*icon styles*/
@@ -529,22 +541,28 @@ i.fi-social-tumblr {
     	
   	</script>
 	<script>
-	
-	/**
-	*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-	*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-	
-	var disqus_config = function () {
-//	this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-	this.page.identifier = "\{\{ / }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-	};
-	(function() { // DON'T EDIT BELOW THIS LINE
-	var d = document, s = d.createElement('script');
-	s.src = 'https://test-4zksygpoh9.disqus.com/embed.js';
-	s.setAttribute('data-timestamp', +new Date());
-	(d.head || d.body).appendChild(s);
-	})();
+
+		/**
+		*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+		*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+		/*
+		var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		};
+		*/
+		var disqus_config = function () {
+		var pathname=location.pathname;
+		//this.page.url = '{{}}';  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = "\{\{ "+pathname+" }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		};
+		(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = 'https://test-4zksygpoh9.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+		})();
 	</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </body>
 </html>

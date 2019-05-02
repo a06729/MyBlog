@@ -148,10 +148,13 @@ public class MainController {
 			                  Model model,Principal principal) {
 		BoardDto boardDto;
 		boardDto=mainService.getContent(boardNum);
-		
+		log.info("boardDto:"+boardDto);
 		Cookie[] cookies=req.getCookies();
 		Cookie viewCookie=null;
-
+		
+		if(boardDto==null) {
+			return "errorPage/404";
+		}
 		
 		if(cookies!=null && cookies.length>0) {
 			for(int i=0; i<cookies.length; i++) {
@@ -306,7 +309,7 @@ public class MainController {
 			String setFrom="MongRaGong@gmail.com";
 			String tomail=username;
 			String title="비밀번호 변경 링크";
-			String content=new StringBuffer().append("<a href='http://localhost:8080/passResetPage?uuid=").append(uuid).append("&username=").append(username).append("'target='_blenk''>비밀번호 초기화링크</a>").toString();
+			String content=new StringBuffer().append("<a href='http://issuesave.top/passResetPage?uuid=").append(uuid).append("&username=").append(username).append("'target='_blenk''>비밀번호 초기화링크</a>").toString();
 			//<a href=\"/passResetPage&uuid="+uuid+"\">비밀번호 변경</a>	
 			try {
 				MimeMessage message=mailSender.createMimeMessage();

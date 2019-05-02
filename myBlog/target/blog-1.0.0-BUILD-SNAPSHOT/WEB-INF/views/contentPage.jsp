@@ -286,8 +286,10 @@ i.fi-social-tumblr {
 	/*	*/
 	var disqus_config = function () {
 	var num=boardNum.value;
+	var href=location.href;
+	console.log("href:"+href);
 //	this.page.url = '/contentPage?boardNum='+num;  // Replace PAGE_URL with your page's canonical URL variable
-	this.page.identifier = "\{\{ /contentPage?boardNum="+num+" }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	this.page.identifier = "\{\{"+href+" }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 	
 	};
 
