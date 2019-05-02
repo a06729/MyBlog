@@ -7,21 +7,17 @@
         <title>글쓰기</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/inputTempl.css">
         <link rel="stylesheet" href="css/select.css">
         <link rel="stylesheet" href="css/button.css">
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
-		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
-        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> 
+        <!-- <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
+		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css"> -->
+        <!-- <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">  -->
         <link rel="stylesheet" href="summernote/dist/summernote.css">
-		<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="shortcut icon" type="image/x-icon" href="./image/logoIco.png" >
     </head>
     <style>
@@ -131,27 +127,36 @@
 <!-- 				</div> -->
 <!-- 			</div> -->
 <!-- 		</footer> -->
-<!-- 	   	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
-<!--         <script src="/js/jquery-3.3.1.min.js"></script>  -->
-		<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
-		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
-		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
-		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-        <script src="summernote/dist/summernote.js"></script>
-        <script src="summernote/dist/summernote.min.js"></script>
-        <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-		<script>
-		$(document).foundation();
-		</script>
+	<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+	<script src="summernote/dist/summernote.js"></script>
+	<script src="summernote/dist/lang/summernote-ko-KR.js"></script>
+	<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
 	<script>
-		$(function(){
+		$(document).foundation();
+		$(document).ready(function() {
 			$('#summernote').summernote({
 				height: 600,
 				fontNames : [ '맑은고딕', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
 				fontNamesIgnoreCheck : [ '맑은고딕' ],
+				lang: 'ko-KR',
+				toolbar: [
+					// [groupName, [list of button]]
+					['style', ['bold', 'italic', 'underline', 'clear']],
+					['fontname', ['fontname']],
+					['fontsize', ['fontsize']],
+					['color', ['color']],
+					['para', ['ul', 'ol', 'paragraph']],
+					['height', ['height']],
+					['link',['link']],
+					['video',['video']],
+					['picture',['picture']],
+					['fullscreen',['fullscreen']],
+					['codeview',['codeview']]
+
+				],
 				focus: true,
-				dialogsInBody: false,
+				dialogsInBody: true,
 				dialogsFade: true,
 				callbacks: {
 					onImageUpload: function(files, editor, welEditable) {
@@ -166,9 +171,7 @@
 				}
 				
 			});
-	
 		});
-		
 		function deleteFile(src){
 			$.ajax({
 				data:{src:src},
