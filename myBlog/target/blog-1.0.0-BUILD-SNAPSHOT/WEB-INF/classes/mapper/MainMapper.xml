@@ -162,6 +162,12 @@
 		]]>
 	</select>
 	
+	<select id="existsFile" parameterType="String" resultType="int">
+		select count(*)
+		from board_file
+		where stored_file_name=#{stored_File_Name};
+	</select>
+	
 	<update id="changePass" parameterType="map">
 		UPDATE member
 		set userpw=#{newPass}
@@ -173,6 +179,13 @@
 		set userpw=#{Encoder}
 		where userid=#{username}
 	</update>
+	
+	<delete id="deletFile" parameterType="String">
+		DELETE
+		FROM board_file
+		where stored_file_name=#{stored_File_Name}
+	</delete>
+	
 	<delete id="deleteUUID" parameterType="map">
 		DELETE
 		FROM uuidUrl

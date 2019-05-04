@@ -8,8 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="ALL">
-<meta name = keywords" content="이슈저장소,페미니즘,대깨문,더불어민주당,더불어페미당,자유한국당">
-<meta name ="description" content="대깨문,더불어민주당,더불어페미당,깨시민,페미니즘,정치/사회,자유한국당">
+<meta name ="description" content="이슈저장소,이슈 저장소">
 <meta name ="author" content="이슈저장소"> 
 <meta name="google-site-verification" content="4-7_fKx76dcD-09r1nSx22mJ0K32eTrVNED-10Tf8HA" />
 <link rel="stylesheet" href="css/bootstrap.min.css">

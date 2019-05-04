@@ -8,6 +8,10 @@
 <title>${boardDto.boardTitle}</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="ALL">
+<meta name = keywords" content="${boardDto.boardTitle}">
+<meta name ="description" content="${boardDto.boardTitle}">
+<meta name ="author" content="이슈저장소"> 
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -45,6 +49,10 @@ i.fi-social-tumblr {
 .fi-social-twitter {
 	color: skyblue;
 	font-size: 2rem;
+}
+iframe{
+	width: 100%;
+	height: 360px;
 }
 </style>
 <body>

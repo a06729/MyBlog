@@ -96,7 +96,7 @@
 						<select
 							name="category" class="select-css"
 							style="margin-top: 10px; margin-bottom: 10px;">
-							<option selected disabled hidden>${boardDto.category}</option>
+							<option selected disabled>${boardDto.category}</option>
 							<option>정치/사회</option>
 							<option>경제</option>
 							<option>페미니즘</option>
@@ -107,7 +107,7 @@
 					</div>
 					<div class="submitArea">
 						<button type="submit" style="margin-top: 10px; float: right;"
-							class="outline white-blue">글쓰기</button>
+							class="outline white-blue">글수정</button>
 <!-- 						<input type="button" style="margin-top: 10px; float: right;" -->
 <!-- 						class="outline white-blue" value="글쓰기"> -->
 					</div>

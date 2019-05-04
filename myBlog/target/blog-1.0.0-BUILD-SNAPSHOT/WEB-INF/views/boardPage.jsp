@@ -128,7 +128,7 @@
 <!-- 			</div> -->
 <!-- 		</footer> -->
 	<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
-	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+	<script type="text/javascript" src="js/bootstrap.js"></script> 
 	<script src="summernote/dist/summernote.js"></script>
 	<script src="summernote/dist/lang/summernote-ko-KR.js"></script>
 	<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>

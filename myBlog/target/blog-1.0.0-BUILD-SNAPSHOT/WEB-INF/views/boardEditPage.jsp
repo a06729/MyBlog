@@ -107,7 +107,7 @@
 					</div>
 					<div class="submitArea">
 						<button type="submit" style="margin-top: 10px; float: right;"
-							class="outline white-blue">글쓰기</button>
+							class="outline white-blue">글수정</button>
 <!-- 						<input type="button" style="margin-top: 10px; float: right;" -->
 <!-- 						class="outline white-blue" value="글쓰기"> -->
 					</div>

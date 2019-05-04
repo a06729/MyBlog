@@ -73,5 +73,8 @@ public interface MainDao {
 
 	public void changePass(Map<String, String> map);
 
+	public int existsFile(String stored_File_Name);
+
+	public void deletFile(String stored_File_Name);
 
 }

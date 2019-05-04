@@ -121,6 +121,11 @@ public class MainServiceImpl implements MainService {
 		boardFileDto.setFile_Size(file.length());
 		if(file.exists()) {
 			file.delete();
+			int exists=mainDao.existsFile(stored_File_Name);
+			
+			if(exists>=1) { //파일명이 db에 존재할 경우
+				mainDao.deletFile(stored_File_Name);
+			}
 		}
 		return boardFileDto;
 	}
